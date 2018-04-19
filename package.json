@@ -1,0 +1,38 @@
+{
+  "name": "burnoutjs",
+  "description": "",
+  "version": "0.1.0-alpha",
+  "main": "dist/burnout.cjs.js",
+  "module": "dist/burnout.esm.js",
+  "author": {
+    "name": "afonsopacifer",
+    "email": "afonsopacifer@live.com"
+  },
+  "bugs": {
+    "url": "https://github.com/afonsopacifer/burnoutjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afonsopacifer/burnoutjs"
+  },
+  "scripts": {
+    "test": "",
+    "build": "BABEL_ENV=dev rollup -c",
+    "dev": "BABEL_ENV=dev rollup -c -w",
+    "jsdocs": "jsdoc src/*.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint-plugin-html": "^4.0.3",
+    "jsdoc": "^3.5.3",
+    "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-filesize": "^1.4.2",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.3.1",
+    "uglify-es": "^3.0.24"
+  }
+}
