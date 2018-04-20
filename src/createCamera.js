@@ -3,8 +3,8 @@
  * @module createCamera
  *
  * @param {object} configs - Grid layout columns and rows for define the size (relative the map).
- * @param {object} configs.cols - View columns positions.
- * @param {object} configs.rows - View rows positions.
+ * @param {number} configs.cols - View columns positions.
+ * @param {number} configs.rows - View rows positions.
  * @param {number} [blockSize = 20] - Size of all grid blocks.
  * @param {object} [context = window.document] - Context for execute the DOM API.
  *

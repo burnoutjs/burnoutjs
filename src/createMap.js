@@ -3,8 +3,8 @@
  * @module createMap
  *
  * @param {object} configs - Grid layout columns and rows.
- * @param {object} configs.cols - Map columns positions.
- * @param {object} configs.rows - Map rows positions.
+ * @param {number} configs.cols - Map columns positions.
+ * @param {number} configs.rows - Map rows positions.
  * @param {number} [blockSize = 20] - Size of all grid blocks.
  * @param {object} [context = window.document] - Context for execute the DOM API.
  *
