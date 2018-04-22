@@ -5,7 +5,7 @@ import stringifyPosition from './stringifyPosition';
  * @module createBlock
  * 
  * @param {object} configs - All block configs.
- * @param {string} configs.className - The block css class.
+ * @param {string} configs.className - The block CSS class.
  * @param {boolean} configs.collision - Register for collisons.
  * @param {object} configs.position - Block position in map.
  * @param {number} configs.position.rowStart - Start row position.

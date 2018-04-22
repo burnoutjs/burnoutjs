@@ -1,6 +1,7 @@
 import createMap from './createMap';
 import createCamera from './createCamera';
 import createBlock from './createBlock';
+import createAvatar from './createAvatar';
 
 /**
  * Wrapper function for 2D game engine for manage collisions.
@@ -68,7 +69,7 @@ const burnout = () => {
      * Create a block, register for collision and append in map. 
      *
      * @param {object} configs - All block configs.
-     * @param {string} configs.className - The block css class.
+     * @param {string} configs.className - The block CSS class.
      * @param {boolean} configs.collision - Register for collisons.
      * @param {object} configs.position - Block position in map.
      * @param {number} configs.position.rowStart - Start row position.
@@ -98,6 +99,36 @@ const burnout = () => {
       }
       
       states.mapRef.appendChild(block);
+    },
+
+    /**
+     * Create the avatar and append in map. 
+     *
+     * @param {object} configs - All avatar configs.
+     * @param {string} configs.className - The avatar CSS class.
+     * @param {object} configs.position - Avatar position in map.
+     * @param {number} configs.position.rowStart - Start row position.
+     * @param {number} configs.position.columnStart - Start column position.
+     * @param {number} configs.position.rowEnd - End row position.
+     * @param {number} configs.position.columnEnd - End column position.
+     *
+     * param example:
+     * 
+     * {
+     *  className: 'ash',
+     *  position: {
+     *   rowStart: 20,
+     *   columnStart: 20,
+     *   rowEnd: 21,
+     *   columnEnd: 21,
+     *  }
+     * }
+     */
+
+    defineAvatar: configs => {
+      const avatar = createAvatar(configs);
+
+      states.mapRef.appendChild(avatar);
     },
 
   };
