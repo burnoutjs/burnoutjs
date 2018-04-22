@@ -19,7 +19,9 @@ const burnout = () => {
 
   const states = {
     mapRef: null,
-    collisionBlocks: [],
+    blocksRefs: [],
+    collisionBlocksPositions: [],
+    avatarRef: null,
   };
 
   return {
@@ -28,7 +30,6 @@ const burnout = () => {
      * Create all basic DOM elements (map and view) for position and view the game layout. 
      *
      * @param {object} configs - All configs for Grid layout design.
-     * @param {string} configs.containerId - ID for append all dynamic elements.
      * @param {number} configs.blockSize - Size of all grid blocks.
      * @param {object} configs.map - Map columns and rows positions.
      * @param {number} configs.map.cols - Map columns positions.
@@ -40,7 +41,6 @@ const burnout = () => {
      * param example:
      * 
      * {
-     *  containerId: 'myElement',
      *  blockSize: 10,
      *  map: {
      *   cols: 30,
@@ -54,19 +54,16 @@ const burnout = () => {
      */
 
     defineMap: configs => {
-      const container = document.getElementById(configs.containerId);
-  
       const map = createMap(configs.map, configs.blockSize);
       const view = createCamera(configs.view, configs.blockSize);
   
       view.appendChild(map);
-      container.appendChild(view);
-  
+
       states.mapRef = map;
     },
 
     /**
-     * Create a block, register for collision and append in map. 
+     * Create a block and register for collision.
      *
      * @param {object} configs - All block configs.
      * @param {string} configs.className - The block CSS class.
@@ -95,14 +92,14 @@ const burnout = () => {
       const block = createBlock(configs);
       
       if (configs.collision) {
-        states.collisionBlocks.push(configs.position);
+        states.collisionBlocksPositions.push(configs.position);
       }
       
-      states.mapRef.appendChild(block);
+      states.blocksRefs.push(block);
     },
 
     /**
-     * Create the avatar and append in map. 
+     * Create the avatar. 
      *
      * @param {object} configs - All avatar configs.
      * @param {string} configs.className - The avatar CSS class.
@@ -128,7 +125,23 @@ const burnout = () => {
     defineAvatar: configs => {
       const avatar = createAvatar(configs);
 
-      states.mapRef.appendChild(avatar);
+      states.avatarRef = avatar;
+    },
+
+    /**
+     * Mount all map and append in the DOM. 
+     *
+     * @param {object} container - DOM element for append all dynamic elements.
+     *
+     */
+
+    renderMap: container => {
+      states.blocksRefs.forEach(block => {
+        states.mapRef.appendChild(block);
+      });
+
+      states.mapRef.appendChild(states.avatarRef);
+      container.appendChild(states.mapRef);
     },
 
   };
