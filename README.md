@@ -2,6 +2,163 @@
 
 > :video_game: The 2D game engine for manage collisions. Made with javascript and CSS Grid Layout. :heartbeat:
 
+## Features
+
+- Grid based map (Powered by Grid Layout API).
+- Create and position blocks in the map (Following the Grid Layout API).
+- Create an avatar for playing the game.
+- Register blocks for collisions with avatar.
+- Set keyboard commands for control the avatar into the map.
+- Developer mode for easily style the map.
+
+## How to use?
+
+### Install
+
+**Tip:** Verify if you have [node](http://nodejs.org/) and [yarn](https://yarnpkg.com/pt-BR/) installed.
+
+```sh
+$ yarn add burnoutjs
+```
+
+### Setup
+
+#### ES6/ECMAScript 2015 module:
+
+**Tip:** Use [Webpack](https://webpack.github.io/) (or similar module bundler) to manage the components.
+
+```js
+import burnout from 'burnoutjs';
+```
+
+#### CommonJS module:
+
+**Tip:** Use [Browserify](http://browserify.org/) (or similar module bundler) to manage the components.
+
+```js
+const burnout = require('burnoutjs');
+```
+
+### Create you game
+
+#### 1 - Define your map:
+
+```js
+burnout.defineMap({
+  developer: true,
+  blockSize: 10,
+  map: {
+    cols: 30,
+    rows: 30,
+  },
+  view: {
+    cols: 15,
+    rows: 15,
+  },
+});
+```
+
+#### 2 - Create as many blocks as you like:
+
+```js
+burnout.defineBlock({
+  className: 'wall',
+  collision: true,
+  position: {
+    rowStart: 20,
+    columnStart: 20,
+    rowEnd: 21,
+    columnEnd: 21,
+  }
+});
+```
+
+#### 3 - Define your avatar.
+
+```js
+burnout.defineAvatar({
+  className: 'player',
+  position: {
+    rowStart: 7,
+    columnStart: 7,
+    rowEnd: 8,
+    columnEnd: 8,
+  }
+});
+```
+
+#### 4 - Set all game controls.
+
+```js
+burnout.defineControls({
+  keyboard: {
+    up: 38,
+    down: 40,
+    left: 37,
+    right: 39,
+  }
+});
+```
+
+#### 5 - Render the game in the DOM.
+
+```js
+const container = document.getElementById('anyDomElement');
+burnout.renderMap(container);
+```
+
+#### Result:
+
+*Collision example with keyboard controls:*
+
+![Game demo](docs/demo.gif)
+
+- Red border: Camera/view of the game.
+- Black border: All game map.
+- Purple block: The avatar controlled via keyboard.
+- Green block: A single block for collision.
+
+<hr>
+
+## Development
+
+### Getting started
+
+Clone this repository and install its dependencies:
+
+```sh
+$ git clone https://github.com/afonsopacifer/burnoutjs.git
+$ cd burnoutjs
+$ yarn
+```
+### Build
+
+Builds the library to dist:
+
+```shev
+$ yarn build
+```
+
+Builds the library, then keeps rebuilding it whenever the source files change using [rollup-watch](https://github.com/rollup/rollup-watch):
+
+```sh
+$ yarn dev
+```
+
+### Code Style
+
+Follow the [JS Code Style Guide](https://github.com/afonsopacifer/code-style-guide/blob/master/js/JS.md) by [Afonso Pacifer](https://github.com/afonsopacifer).
+
+*All code style are automatic validate with [ESLint](http://eslint.org/):*
+
+### Tests
+
+*Run all unit tests:*
+
+```sh
+$ yarn test
+```
+
 <hr>
 
 ## Versioning
