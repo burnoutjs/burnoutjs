@@ -37,6 +37,7 @@ const burnout = () => {
      * for position and view the game layout.
      *
      * @param {object} configs - All configs for Grid layout design.
+     * @param {boolean} developer - Developer mode
      * @param {number} configs.blockSize - Size of all grid blocks.
      * @param {object} configs.map - Map columns and rows positions.
      * @param {number} configs.map.cols - Map columns positions.
@@ -63,6 +64,12 @@ const burnout = () => {
     defineMap: configs => {
       const map = createMap(configs.map, configs.blockSize);
       const view = createCamera(configs.view, configs.blockSize);
+
+      if (configs.developer) {
+        map.style.border = `1px solid`;
+        view.style.border = `1px solid red`;
+        view.style.overflow = `visible`;
+      }
 
       view.appendChild(map);
 
@@ -176,14 +183,14 @@ const burnout = () => {
      * }
      */
 
-    defineControls: (configs) => { 
+    defineControls: (configs) => {
 
       if(configs.keyboard) {
         setKeyboardControls(
-          states.avatar, 
-          states.mapRef, 
-          states.collisionBlocksPositions, 
-          states.blockSize, 
+          states.avatar,
+          states.mapRef,
+          states.collisionBlocksPositions,
+          states.blockSize,
           configs.keyboard
         );
       }

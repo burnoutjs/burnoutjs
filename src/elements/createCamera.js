@@ -19,7 +19,6 @@ const createCamera = (configs, blockSize = 20, context = window) => {
   camera.style = `
     width: ${configs.cols * blockSize}px;
     height: ${configs.rows * blockSize}px;
-    border: solid 1px red;
   `;
 
   return camera;

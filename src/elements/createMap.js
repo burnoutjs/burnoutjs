@@ -22,7 +22,7 @@ const createMap = (configs, blockSize = 20, context = window) => {
     grid-template-rows: repeat(${configs.rows}, ${blockSize}px);
     width: ${configs.cols * blockSize}px;
     height: ${configs.rows * blockSize}px;
-    border: 1px solid;
+    overflow: hidden;
   `;
 
   return map;
