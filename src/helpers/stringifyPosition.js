@@ -1,6 +1,6 @@
 /**
  * Create a grid-area style with all grid cell positions. 
- * @module stringifyPosition
+ * @module helpers/stringifyPosition
  * 
  * @param {object} position - Block position in map.
  * @param {number} position.rowStart - Start row position.
@@ -13,13 +13,11 @@
  */
 
 const stringifyPosition = position => {
-
   return `grid-area: 
             ${position.rowStart} / 
             ${position.columnStart} /
             ${position.rowEnd} /
             ${position.columnEnd}`;
-
-}
+};
 
 export default stringifyPosition;

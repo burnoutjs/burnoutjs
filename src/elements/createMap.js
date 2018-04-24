@@ -1,20 +1,20 @@
 /**
  * Create a DOM element with Grid Layout container styles (map).
- * @module createMap
+ * @module elements/createMap
  *
  * @param {object} configs - Grid layout columns and rows.
  * @param {number} configs.cols - Map columns positions.
  * @param {number} configs.rows - Map rows positions.
  * @param {number} [blockSize = 20] - Size of all grid blocks.
- * @param {object} [context = window.document] - Context for execute the DOM API.
+ * @param {object} [context = window] - Context for execute the DOM API.
  *
- * @returns {object} A DOM element with crid layout container styles (map).
+ * @returns {object} A DOM element with grid layout container styles (map).
  *
  */
 
-const createMap = (configs, blockSize = 20, context = window.document) => {
+const createMap = (configs, blockSize = 20, context = window) => {
 
-  const map = context.createElement('div');
+  const map = context.document.createElement('div');
 
   map.style = `
     display: grid;
@@ -27,6 +27,6 @@ const createMap = (configs, blockSize = 20, context = window.document) => {
 
   return map;
 
-}
+};
 
 export default createMap;

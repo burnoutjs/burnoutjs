@@ -1,7 +1,8 @@
-import createMap from './createMap';
-import createCamera from './createCamera';
-import createBlock from './createBlock';
-import createAvatar from './createAvatar';
+import createMap from './elements/createMap';
+import createCamera from './elements/createCamera';
+import createBlock from './elements/createBlock';
+import createAvatar from './elements/createAvatar';
+import setKeyboardControls from './controls/setKeyboardControls';
 
 /**
  * Wrapper function for 2D game engine for manage collisions.
@@ -12,22 +13,28 @@ import createAvatar from './createAvatar';
 
 const burnout = () => {
 
-  /** 
+  /**
    * @constant states - Store all states 
    * @type {object}
   */
 
   const states = {
     mapRef: null,
+    viewRef: null,
     blocksRefs: [],
     collisionBlocksPositions: [],
-    avatarRef: null,
+    blockSize: null,
+    avatar: {
+      ref: null,
+      startPosition: null,
+    },
   };
 
   return {
 
     /**
-     * Create all basic DOM elements (map and view) for position and view the game layout. 
+     * Create all basic DOM elements (map and view)
+     * for position and view the game layout.
      *
      * @param {object} configs - All configs for Grid layout design.
      * @param {number} configs.blockSize - Size of all grid blocks.
@@ -56,10 +63,12 @@ const burnout = () => {
     defineMap: configs => {
       const map = createMap(configs.map, configs.blockSize);
       const view = createCamera(configs.view, configs.blockSize);
-  
+
       view.appendChild(map);
 
+      states.viewRef = view;
       states.mapRef = map;
+      states.blockSize = configs.blockSize;
     },
 
     /**
@@ -94,7 +103,7 @@ const burnout = () => {
       if (configs.collision) {
         states.collisionBlocksPositions.push(configs.position);
       }
-      
+
       states.blocksRefs.push(block);
     },
 
@@ -125,11 +134,12 @@ const burnout = () => {
     defineAvatar: configs => {
       const avatar = createAvatar(configs);
 
-      states.avatarRef = avatar;
+      states.avatar.ref = avatar;
+      states.avatar.startPosition = configs.position;
     },
 
     /**
-     * Mount all map and append in the DOM. 
+     * Mount all map, append in the DOM and set game controls. 
      *
      * @param {object} container - DOM element for append all dynamic elements.
      *
@@ -140,8 +150,44 @@ const burnout = () => {
         states.mapRef.appendChild(block);
       });
 
-      states.mapRef.appendChild(states.avatarRef);
-      container.appendChild(states.mapRef);
+      states.mapRef.appendChild(states.avatar.ref);
+      container.appendChild(states.viewRef);
+    },
+
+    /**
+     * Create all game controls.
+     *
+     * @param {object} configs - All game controls configs.
+     * @param {object} configs.keyboard - All keyboard game controls configs.
+     * @param {number} configs.keyboard.up - Keycode up movement.
+     * @param {number} configs.keyboard.down - Keycode down movement.
+     * @param {number} configs.keyboard.left - Keycode left movement.
+     * @param {number} configs.keyboard.right - Keycode right movement.
+     *
+     * param example:
+     *
+     * {
+     *  keyboard: {
+     *    up: 20,
+     *    down: 20,
+     *    left: 21,
+     *    right: 21,
+     *  }
+     * }
+     */
+
+    defineControls: (configs) => { 
+
+      if(configs.keyboard) {
+        setKeyboardControls(
+          states.avatar, 
+          states.mapRef, 
+          states.collisionBlocksPositions, 
+          states.blockSize, 
+          configs.keyboard
+        );
+      }
+
     },
 
   };
