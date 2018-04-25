@@ -68,12 +68,12 @@ const setKeyboardControls = (
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
-        collision.block.action();
+        collision.block.action(collision.block);
       };
 
       const over = wasBumped(newPosition, collisionBlocksPositions)
       if (over.result) {
-        over.block.action();
+        over.block.action(over.block);
         return;
       };
 
@@ -93,12 +93,12 @@ const setKeyboardControls = (
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
-        collision.block.action();
+        collision.block.action(collision.block);
       };
 
       const over = wasBumped(newPosition, collisionBlocksPositions)
       if (over.result) {
-        over.block.action();
+        over.block.action(over.block);
         return;
       };
 
@@ -118,12 +118,12 @@ const setKeyboardControls = (
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
-        collision.block.action();
+        collision.block.action(collision.block);
       };
 
       const over = wasBumped(newPosition, collisionBlocksPositions)
       if (over.result) {
-        over.block.action();
+        over.block.action(over.block);
         return;
       };
 
@@ -143,12 +143,12 @@ const setKeyboardControls = (
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
-        collision.block.action();
+        collision.block.action(collision.block);
       };
 
       const over = wasBumped(newPosition, collisionBlocksPositions)
       if (over.result) {
-        over.block.action();
+        over.block.action(over.block);
         return;
       };
 
