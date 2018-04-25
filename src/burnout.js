@@ -27,6 +27,7 @@ const burnout = () => {
     avatar: {
       ref: null,
       startPosition: null,
+      side: null,
     },
   };
 
@@ -129,6 +130,12 @@ const burnout = () => {
      * 
      * {
      *  className: 'ash',
+     *  side: {
+     *    up: 'ash--up',
+     *    down: 'ash--down',
+     *    left: 'ash--left',
+     *    right: 'ash--right',
+     *  },
      *  position: {
      *   rowStart: 20,
      *   columnStart: 20,
@@ -143,6 +150,7 @@ const burnout = () => {
 
       states.avatar.ref = avatar;
       states.avatar.startPosition = configs.position;
+      states.avatar.side = configs.side
     },
 
     /**
