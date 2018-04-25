@@ -23,6 +23,7 @@ const burnout = () => {
     viewRef: null,
     blocksRefs: [],
     collisionBlocksPositions: [],
+    overBlocksPositions: [],
     blockSize: null,
     avatar: {
       ref: null,
@@ -84,12 +85,14 @@ const burnout = () => {
      *
      * @param {object} configs - All block configs.
      * @param {string} configs.className - The block CSS class.
-     * @param {boolean} configs.collision - Register for collisons.
+     * @param {boolean} configs.collision - Register for collisions.
+     * @param {boolean} configs.over - Register to over.
      * @param {object} configs.position - Block position in map.
      * @param {number} configs.position.rowStart - Start row position.
      * @param {number} configs.position.columnStart - Start column position.
      * @param {number} configs.position.rowEnd - End row position.
      * @param {number} configs.position.columnEnd - End column position.
+     * @param {function} configs.position.action - Action for over or collision callbacks.
      *
      * param example:
      * 
@@ -101,15 +104,20 @@ const burnout = () => {
      *   columnStart: 20,
      *   rowEnd: 21,
      *   columnEnd: 21,
+     *   action: () => console.log('Collided'),
      *  }
      * }
      */
 
     defineBlock: configs => {
       const block = createBlock(configs);
-      
+
       if (configs.collision) {
         states.collisionBlocksPositions.push(configs.position);
+      }
+
+      if (configs.over) {
+        states.overBlocksPositions.push(configs.position);
       }
 
       states.blocksRefs.push(block);
@@ -198,6 +206,7 @@ const burnout = () => {
           states.avatar,
           states.mapRef,
           states.collisionBlocksPositions,
+          states.overBlocksPositions,
           states.blockSize,
           configs.keyboard
         );

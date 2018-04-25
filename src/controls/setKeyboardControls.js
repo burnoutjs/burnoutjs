@@ -25,6 +25,7 @@ import keyPress from './helpers/keyPress';
  * @param {string} avatar.side.right - ClassName for right sprite.
  * @param {object} map - Map DOM reference.
  * @param {array} collisionBlocksPositions - List of blocks for collisions.
+ * @param {array} overBlocksPositions - List of blocks to over.
  * @param {number} blockSize - Size of all grid blocks.
  * @param {object} configs - All keyboard game controls configs.
  * @param {number} configs.up - Keycode up movement.
@@ -41,6 +42,7 @@ const setKeyboardControls = (
   avatar,
   map,
   collisionBlocksPositions,
+  overBlocksPositions,
   blockSize,
   configs,
   context = window) => {
@@ -61,10 +63,19 @@ const setKeyboardControls = (
 
       if (!(states.currentAvatarSide === 'up')) {
         avatar.ref.className = avatar.side.up;
-        states.currentAvatarSide = 'up'
+        states.currentAvatarSide = 'up';
       };
 
-      if (wasBumped(newPosition, collisionBlocksPositions)) return;
+      const collision = wasBumped(newPosition, overBlocksPositions);
+      if (collision.result) {
+        collision.block.action();
+      };
+
+      const over = wasBumped(newPosition, collisionBlocksPositions)
+      if (over.result) {
+        over.block.action();
+        return;
+      };
 
       states.currentCameraPosition.y += blockSize;
       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
@@ -77,10 +88,19 @@ const setKeyboardControls = (
 
       if (!(states.currentAvatarSide === 'down')) {
         avatar.ref.className = avatar.side.down;
-        states.currentAvatarSide = 'down'
+        states.currentAvatarSide = 'down';
       };
 
-      if (wasBumped(newPosition, collisionBlocksPositions)) return;
+      const collision = wasBumped(newPosition, overBlocksPositions);
+      if (collision.result) {
+        collision.block.action();
+      };
+
+      const over = wasBumped(newPosition, collisionBlocksPositions)
+      if (over.result) {
+        over.block.action();
+        return;
+      };
 
       states.currentCameraPosition.y -= blockSize;
       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
@@ -93,10 +113,19 @@ const setKeyboardControls = (
 
       if (!(states.currentAvatarSide === 'left')) {
         avatar.ref.className = avatar.side.left;
-        states.currentAvatarSide = 'left'
+        states.currentAvatarSide = 'left';
       };
 
-      if (wasBumped(newPosition, collisionBlocksPositions)) return;
+      const collision = wasBumped(newPosition, overBlocksPositions);
+      if (collision.result) {
+        collision.block.action();
+      };
+
+      const over = wasBumped(newPosition, collisionBlocksPositions)
+      if (over.result) {
+        over.block.action();
+        return;
+      };
 
       states.currentCameraPosition.x += blockSize;
       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
@@ -109,10 +138,19 @@ const setKeyboardControls = (
 
       if (!(states.currentAvatarSide === 'right')) {
         avatar.ref.className = avatar.side.right;
-        states.currentAvatarSide = 'right'
+        states.currentAvatarSide = 'right';
       };
 
-      if (wasBumped(newPosition, collisionBlocksPositions)) return;
+      const collision = wasBumped(newPosition, overBlocksPositions);
+      if (collision.result) {
+        collision.block.action();
+      };
+
+      const over = wasBumped(newPosition, collisionBlocksPositions)
+      if (over.result) {
+        over.block.action();
+        return;
+      };
 
       states.currentCameraPosition.x -= blockSize;
       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
