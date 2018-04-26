@@ -1,7 +1,7 @@
 {
   "name": "burnoutjs",
-  "description": "",
-  "version": "0.1.0-alpha",
+  "description": "2D game engine for manage collisions. Made with javascript and CSS Grid Layout.",
+  "version": "0.2.0-alpha",
   "main": "dist/burnout.cjs.js",
   "module": "dist/burnout.esm.js",
   "author": {
