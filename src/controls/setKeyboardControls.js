@@ -61,10 +61,12 @@ const setKeyboardControls = (
     if (keyPress(e, configs.up)) {
       const newPosition = moveUp(states.currentAvatarPosition);
 
-      if (!(states.currentAvatarSide === 'up')) {
-        avatar.ref.className = avatar.side.up;
-        states.currentAvatarSide = 'up';
-      };
+      if(avatar.side) {
+        if (!(states.currentAvatarSide === 'up')) {
+          avatar.ref.className = avatar.side.up;
+          states.currentAvatarSide = 'up';
+        };
+      }
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
@@ -86,10 +88,12 @@ const setKeyboardControls = (
     if (keyPress(e, configs.down)) {
       const newPosition = moveDown(states.currentAvatarPosition);
 
-      if (!(states.currentAvatarSide === 'down')) {
-        avatar.ref.className = avatar.side.down;
-        states.currentAvatarSide = 'down';
-      };
+      if(avatar.side) {
+        if (!(states.currentAvatarSide === 'down')) {
+          avatar.ref.className = avatar.side.down;
+          states.currentAvatarSide = 'down';
+        };
+      }
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
@@ -111,10 +115,12 @@ const setKeyboardControls = (
     if (keyPress(e, configs.left)) {
       const newPosition = moveLeft(states.currentAvatarPosition);
 
-      if (!(states.currentAvatarSide === 'left')) {
-        avatar.ref.className = avatar.side.left;
-        states.currentAvatarSide = 'left';
-      };
+      if(avatar.side) {
+        if (!(states.currentAvatarSide === 'left')) {
+          avatar.ref.className = avatar.side.left;
+          states.currentAvatarSide = 'left';
+        };
+      }
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
@@ -136,19 +142,25 @@ const setKeyboardControls = (
     if (keyPress(e, configs.right)) {
       const newPosition = moveRight(states.currentAvatarPosition);
 
-      if (!(states.currentAvatarSide === 'right')) {
-        avatar.ref.className = avatar.side.right;
-        states.currentAvatarSide = 'right';
-      };
+      if(avatar.side) {
+        if (!(states.currentAvatarSide === 'right')) {
+          avatar.ref.className = avatar.side.right;
+          states.currentAvatarSide = 'right';
+        };
+      }
 
       const collision = wasBumped(newPosition, overBlocksPositions);
       if (collision.result) {
-        collision.block.action(collision.block);
+        if (collision.block.action) {
+          collision.block.action(collision.block);
+        }
       };
 
       const over = wasBumped(newPosition, collisionBlocksPositions)
       if (over.result) {
-        over.block.action(over.block);
+        if (over.block.action) {
+          over.block.action(over.block);
+        }
         return;
       };
 
