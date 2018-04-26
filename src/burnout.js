@@ -3,6 +3,7 @@ import createCamera from './elements/createCamera';
 import createBlock from './elements/createBlock';
 import createAvatar from './elements/createAvatar';
 import setKeyboardControls from './controls/setKeyboardControls';
+import stringifyPosition from './helpers/stringifyPosition';
 
 /**
  * Wrapper function for 2D game engine for manage collisions.
@@ -212,6 +213,74 @@ const burnout = () => {
         );
       }
 
+    },
+
+    /**
+     * Get the avatar DOM reference.
+     * 
+     * @returns {object} Avatar DOM element.
+     *
+     */
+
+    getAvatar: () => states.avatar.ref,
+
+    /**
+     * Get the map DOM reference.
+     * 
+     * @returns {object} Map DOM element.
+     *
+     */
+
+    getMap: () => states.mapRef,
+
+    /**
+     * Get the view DOM reference.
+     * 
+     * @returns {object} View DOM element.
+     *
+     */
+
+    getView: () => states.viewRef,
+
+    /**
+     * Get the specific block DOM reference.
+     *
+     * @param {object} configs.position - Block position in map.
+     * @param {number} configs.position.rowStart - Start row position.
+     * @param {number} configs.position.columnStart - Start column position.
+     * @param {number} configs.position.rowEnd - End row position.
+     * @param {number} configs.position.columnEnd - End column position.
+     * 
+     * param example:
+     * 
+     * {
+     *  rowStart: 20,
+     *  columnStart: 20,
+     *  rowEnd: 21,
+     *  columnEnd: 21,
+     * }
+     *
+     * @returns {object} Block DOM element.
+     *
+     */
+
+    getBlock: (positions) => {
+      const newBlock = states.blocksRefs.filter((block) => {
+
+        const stringPositions = stringifyPosition(positions)
+                                  .replace(/\s/g,''); // Remove whitespace
+        
+        const blockStringPositions = block
+                                      .style
+                                      .cssText
+                                      .replace(/\s/g,'') // Remove whitespace
+                                      .replace(/\;/g,''); // Remove semicolons
+
+        return stringPositions == blockStringPositions;
+
+      });
+
+      return newBlock[0];
     },
 
   };
