@@ -7,9 +7,12 @@
 - Grid based map (Powered by Grid Layout API).
 - Create and position blocks in the map (Following the Grid Layout API).
 - Create an avatar for playing the game.
-- Register blocks for collisions with avatar.
+- Set different styles for all avatar sides.
+- Register blocks for collisions with avatar (with configurable callbacks).
+- Register blocks for avatar over (with configurable callbacks).
 - Set keyboard commands for control the avatar into the map.
 - Developer mode for easily style the map.
+- Easily access to map, view, avatar and blocks DOM references.
 
 ## How to use?
 
@@ -60,10 +63,11 @@ burnout.defineMap({
 
 #### 2 - Create as many blocks as you like:
 
+*A simple block*
+
 ```js
 burnout.defineBlock({
-  className: 'wall',
-  collision: true,
+  className: 'block',
   position: {
     rowStart: 20,
     columnStart: 20,
@@ -73,11 +77,53 @@ burnout.defineBlock({
 });
 ```
 
+*A block with collision and callback action*
+
+```js
+burnout.defineBlock({
+  className: 'wall',
+  collision: true,
+  position: {
+    rowStart: 20,
+    columnStart: 20,
+    rowEnd: 21,
+    columnEnd: 21,
+    action: (blockPosition) => {
+      console.log(blockPosition);
+    },
+  }
+});
+```
+
+*A block with over and callback action*
+
+```js
+burnout.defineBlock({
+  className: 'grass',
+  over: true,
+  position: {
+    rowStart: 20,
+    columnStart: 20,
+    rowEnd: 21,
+    columnEnd: 21,
+    action: (blockPosition) => {
+      console.log(blockPosition);
+    },
+  }
+});
+```
+
 #### 3 - Define your avatar.
 
 ```js
 burnout.defineAvatar({
   className: 'player',
+  side: {
+    up: 'player--up',
+    down: 'player--down',
+    left: 'player--left',
+    right: 'player--right',
+  },
   position: {
     rowStart: 7,
     columnStart: 7,
@@ -106,8 +152,7 @@ burnout.defineControls({
 const container = document.getElementById('anyDomElement');
 burnout.renderMap(container);
 ```
-
-#### Result:
+#### Result (with a collision block):
 
 *Collision example with keyboard controls:*
 
@@ -117,6 +162,29 @@ burnout.renderMap(container);
 - Black border: All game map.
 - Purple block: The avatar controlled via keyboard.
 - Green block: A single block for collision.
+
+### More features
+
+```js
+burnout.getMap();
+```
+
+```js
+burnout.getView();
+```
+
+```js
+burnout.getAvatar();
+```
+
+```js
+burnout.getBlock({
+  rowStart: 10,
+  columnStart: 10,
+  rowEnd: 11,
+  columnEnd: 11,
+});
+```
 
 <hr>
 
