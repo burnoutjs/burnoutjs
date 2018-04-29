@@ -15,7 +15,7 @@ import stringifyPosition from './helpers/stringifyPosition';
 const burnout = () => {
 
   /**
-   * @constant states - Store all states 
+   * @constant states - Store all states
    * @type {object}
   */
 
@@ -30,6 +30,7 @@ const burnout = () => {
       ref: null,
       startPosition: null,
       side: null,
+      static: null,
     },
   };
 
@@ -50,7 +51,7 @@ const burnout = () => {
      * @param {number} configs.view.rows - View rows positions.
      *
      * param example:
-     * 
+     *
      * {
      *  blockSize: 10,
      *  map: {
@@ -96,7 +97,7 @@ const burnout = () => {
      * @param {function} configs.position.action - Action for over or collision callbacks.
      *
      * param example:
-     * 
+     *
      * {
      *  className: 'block-a',
      *  collision: true,
@@ -125,10 +126,11 @@ const burnout = () => {
     },
 
     /**
-     * Create the avatar. 
+     * Create the avatar.
      *
      * @param {object} configs - All avatar configs.
      * @param {string} configs.className - The avatar CSS class.
+     * @param {boolean} configs.static - Avatar static position in the map.
      * @param {object} configs.position - Avatar position in map.
      * @param {number} configs.position.rowStart - Start row position.
      * @param {number} configs.position.columnStart - Start column position.
@@ -136,7 +138,7 @@ const burnout = () => {
      * @param {number} configs.position.columnEnd - End column position.
      *
      * param example:
-     * 
+     *
      * {
      *  className: 'ash',
      *  side: {
@@ -159,11 +161,12 @@ const burnout = () => {
 
       states.avatar.ref = avatar;
       states.avatar.startPosition = configs.position;
-      states.avatar.side = configs.side
+      states.avatar.side = configs.side;
+      states.avatar.static = configs.static;
     },
 
     /**
-     * Mount all map, append in the DOM and set game controls. 
+     * Mount all map, append in the DOM and set game controls.
      *
      * @param {object} container - DOM element for append all dynamic elements.
      *
@@ -217,7 +220,7 @@ const burnout = () => {
 
     /**
      * Get the avatar DOM reference.
-     * 
+     *
      * @returns {object} Avatar DOM element.
      *
      */
@@ -226,7 +229,7 @@ const burnout = () => {
 
     /**
      * Get the map DOM reference.
-     * 
+     *
      * @returns {object} Map DOM element.
      *
      */
@@ -235,7 +238,7 @@ const burnout = () => {
 
     /**
      * Get the view DOM reference.
-     * 
+     *
      * @returns {object} View DOM element.
      *
      */
@@ -250,9 +253,9 @@ const burnout = () => {
      * @param {number} configs.position.columnStart - Start column position.
      * @param {number} configs.position.rowEnd - End row position.
      * @param {number} configs.position.columnEnd - End column position.
-     * 
+     *
      * param example:
-     * 
+     *
      * {
      *  rowStart: 20,
      *  columnStart: 20,
@@ -269,7 +272,7 @@ const burnout = () => {
 
         const stringPositions = stringifyPosition(positions)
                                   .replace(/\s/g,''); // Remove whitespace
-        
+
         const blockStringPositions = block
                                       .style
                                       .cssText

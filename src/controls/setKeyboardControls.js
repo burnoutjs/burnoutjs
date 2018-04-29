@@ -13,6 +13,7 @@ import keyPress from './helpers/keyPress';
  *
  * @param {object} avatar - All Avatar configs.
  * @param {object} avatar.ref - Avatar DOM reference.
+ * @param {boolean} avatar.static - Avatar static position in the map.
  * @param {object} avatar.startPosition - Avatar position in map.
  * @param {number} avatar.startPosition.rowStart - Start row position.
  * @param {number} avatar.startPosition.columnStart - Start column position.
@@ -79,8 +80,11 @@ const setKeyboardControls = (
         return;
       };
 
-      states.currentCameraPosition.y += blockSize;
-      map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      if (avatar.static) {
+        states.currentCameraPosition.y += blockSize;
+        map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      }
+
       avatar.ref.style = stringifyPosition(newPosition);
       states.currentAvatarPosition = newPosition;
     }
@@ -106,8 +110,11 @@ const setKeyboardControls = (
         return;
       };
 
-      states.currentCameraPosition.y -= blockSize;
-      map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      if (avatar.static) {
+        states.currentCameraPosition.y -= blockSize;
+        map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      }
+
       avatar.ref.style = stringifyPosition(newPosition);
       states.currentAvatarPosition = newPosition;
     }
@@ -133,8 +140,11 @@ const setKeyboardControls = (
         return;
       };
 
-      states.currentCameraPosition.x += blockSize;
-      map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      if (avatar.static) {
+        states.currentCameraPosition.x += blockSize;
+        map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      }
+
       avatar.ref.style = stringifyPosition(newPosition);
       states.currentAvatarPosition = newPosition;
     }
@@ -164,8 +174,11 @@ const setKeyboardControls = (
         return;
       };
 
-      states.currentCameraPosition.x -= blockSize;
-      map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      if (avatar.static) {
+        states.currentCameraPosition.x -= blockSize;
+        map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition);
+      }
+
       avatar.ref.style = stringifyPosition(newPosition);
       states.currentAvatarPosition = newPosition;
     }

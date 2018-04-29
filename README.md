@@ -129,7 +129,8 @@ burnout.defineAvatar({
     columnStart: 7,
     rowEnd: 8,
     columnEnd: 8,
-  }
+  },
+  static: false,
 });
 ```
 
