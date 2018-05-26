@@ -15,25 +15,26 @@
 
 const wasBumped = (position, blocksList) => {
 
-  let bumpedBlock;
+  let block;
 
-  const result = blocksList.some((block) => {
+  const result = blocksList.some(currentBlock => {
 
-    const columnStartCollision = position.columnStart === block.columnStart;
-    const columnEndCollision = position.columnEnd === block.columnEnd;
-    const rowStartCollision =  position.rowStart === block.rowStart;
-    const rowEndCollision = position.rowEnd === block.rowEnd;
+    const columnStartCollision = position.columnStart === currentBlock.columnStart;
+    const columnEndCollision = position.columnEnd === currentBlock.columnEnd;
+    const rowStartCollision =  position.rowStart === currentBlock.rowStart;
+    const rowEndCollision = position.rowEnd === currentBlock.rowEnd;
 
     const columnCollision = columnStartCollision && columnEndCollision;
     const rowCollision = rowStartCollision && rowEndCollision;
 
-    bumpedBlock = block
+    block = currentBlock;
     return (columnCollision && rowCollision);
+
   });
 
   return {
-    result: result,
-    block: bumpedBlock,
+    result,
+    block,
   }
 
 };
