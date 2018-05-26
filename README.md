@@ -10,7 +10,7 @@
 - Set different styles for all avatar sides.
 - Register blocks for collisions with avatar (with configurable callbacks).
 - Register blocks for avatar over (with configurable callbacks).
-- Set keyboard commands for control the avatar into the map.
+- Set multiple type of controls using plugins.
 - Developer mode for easily style the map.
 - Easily access to map, view, avatar and blocks DOM references.
 
@@ -88,7 +88,7 @@ burnout.defineBlock({
     columnStart: 20,
     rowEnd: 21,
     columnEnd: 21,
-    action: (blockPosition) => {
+    action: blockPosition => {
       console.log(blockPosition);
     },
   }
@@ -106,7 +106,7 @@ burnout.defineBlock({
     columnStart: 20,
     rowEnd: 21,
     columnEnd: 21,
-    action: (blockPosition) => {
+    action: blockPosition => {
       console.log(blockPosition);
     },
   }
@@ -136,15 +136,22 @@ burnout.defineAvatar({
 
 #### 4 - Set all game controls.
 
+*Install a plugin for manage controls:*
+
+```sh
+$ yarn add burnout-keyboard-controls-plugin
+```
+
+*Import the plugin:*
+
 ```js
-burnout.defineControls({
-  keyboard: {
-    up: 38,
-    down: 40,
-    left: 37,
-    right: 39,
-  }
-});
+import keyboardControlsPlugin from 'burnout-keyboard-controls-plugin';
+```
+
+*Use:*
+
+```js
+burnout.defineControlsPlugin(keyboardControlsPlugin);
 ```
 
 #### 5 - Render the game in the DOM.
