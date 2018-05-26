@@ -1,18 +1,20 @@
+![burnout.js logologo](docs/burnoutjs-logo.png)
+
 # burnout.js
 
 > :video_game: The 2D game engine for manage collisions. Made with javascript and CSS Grid Layout. :heartbeat:
 
 ## Features
 
-- Grid based map (Powered by Grid Layout API).
-- Create and position blocks in the map (Following the Grid Layout API).
-- Create an avatar for playing the game.
-- Set different styles for all avatar sides.
-- Register blocks for collisions with avatar (with configurable callbacks).
-- Register blocks for avatar over (with configurable callbacks).
-- Set multiple type of controls using plugins.
-- Developer mode for easily style the map.
-- Easily access to map, view, avatar and blocks DOM references.
+- Grid based map (Powered by **Grid Layout API**).
+- Create and position **blocks** in the map (Following the Grid Layout API).
+- Create an **avata**r for playing the game.
+- Set **different styles** for all avatar sides.
+- Register blocks for **collisions** with avatar (with configurable callbacks).
+- Register blocks for avatar **over** (with configurable callbacks).
+- Set **multiple type of controls** using plugins.
+- **Developer mode** for easily style the map.
+- **Easily access** to map, view, avatar and blocks DOM references.
 
 ## How to use?
 
@@ -203,7 +205,7 @@ burnout.getBlock({
 Clone this repository and install its dependencies:
 
 ```sh
-$ git clone https://github.com/afonsopacifer/burnoutjs.git
+$ git clone https://github.com/burnoutjs/burnoutjs.git
 $ cd burnoutjs
 $ yarn
 ```
@@ -243,12 +245,12 @@ To keep better organization of releases we follow the [Semantic Versioning 2.0.0
 
 ## Contributing
 
-Want to contribute? [Follow these recommendations](https://github.com/afonsopacifer/burnoutjs/blob/master/CONTRIBUTING.md).
+Want to contribute? [Follow these recommendations](https://github.com/burnoutjs/burnoutjs/blob/master/CONTRIBUTING.md).
 
 ## History
 
-See [Releases](https://github.com/afonsopacifer/burnoutjs/releases) for detailed changelog.
+See [Releases](https://github.com/burnoutjs/burnoutjs/releases) for detailed changelog.
 
 ## License
 
-[MIT License](https://github.com/afonsopacifer/burnoutjs/blob/master/LICENSE.md) © [Afonso Pacifer](https://github.com/afonsopacifer)
+[MIT License](https://github.com/burnoutjs/burnoutjs/blob/master/LICENSE.md) © [Afonso Pacifer](https://github.com/afonsopacifer)

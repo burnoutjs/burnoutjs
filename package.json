@@ -1,7 +1,7 @@
 {
   "name": "burnoutjs",
   "description": "2D game engine for manage collisions. Made with javascript and CSS Grid Layout.",
-  "version": "0.3.0-alpha",
+  "version": "0.4.0-alpha",
   "main": "dist/burnout.cjs.js",
   "module": "dist/burnout.esm.js",
   "author": {
@@ -9,11 +9,18 @@
     "email": "afonsopacifer@live.com"
   },
   "bugs": {
-    "url": "https://github.com/afonsopacifer/burnoutjs/issues"
+    "url": "https://github.com/burnoutjs/burnoutjs/issues"
   },
+  "keywords": [
+    "game-engine",
+    "grid-layout",
+    "game-development",
+    "css-grid-layout",
+    "css-grid"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/afonsopacifer/burnoutjs"
+    "url": "https://github.com/burnoutjs/burnoutjs"
   },
   "scripts": {
     "test": "",
