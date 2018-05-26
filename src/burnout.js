@@ -2,7 +2,7 @@ import createMap from './elements/createMap';
 import createCamera from './elements/createCamera';
 import createBlock from './elements/createBlock';
 import createAvatar from './elements/createAvatar';
-import setKeyboardControls from './controls/setKeyboardControls';
+import controls from './controls/controls';
 import stringifyPosition from './helpers/stringifyPosition';
 
 /**
@@ -30,7 +30,7 @@ const burnout = () => {
       ref: null,
       startPosition: null,
       side: null,
-      static: null,
+      static: true,
     },
   };
 
@@ -182,40 +182,26 @@ const burnout = () => {
     },
 
     /**
-     * Create all game controls.
+     * Define all game controls.
      *
-     * @param {object} configs - All game controls configs.
-     * @param {object} configs.keyboard - All keyboard game controls configs.
-     * @param {number} configs.keyboard.up - Keycode up movement.
-     * @param {number} configs.keyboard.down - Keycode down movement.
-     * @param {number} configs.keyboard.left - Keycode left movement.
-     * @param {number} configs.keyboard.right - Keycode right movement.
+     * @param controlPlugin - The external plugin for mange all game controls.
      *
-     * param example:
-     *
-     * {
-     *  keyboard: {
-     *    up: 20,
-     *    down: 20,
-     *    left: 21,
-     *    right: 21,
-     *  }
-     * }
      */
 
-    defineControls: (configs) => {
-
-      if(configs.keyboard) {
-        setKeyboardControls(
-          states.avatar,
-          states.mapRef,
-          states.collisionBlocksPositions,
-          states.overBlocksPositions,
-          states.blockSize,
-          configs.keyboard
-        );
+    defineControlsPlugin: controlPlugin => {
+      if(!controlPlugin) {
+        return console.error('Burnout: No plugin added in defineControls() method');
       }
 
+      const coreControls = controls(
+        states.avatar,
+        states.mapRef,
+        states.collisionBlocksPositions,
+        states.overBlocksPositions,
+        states.blockSize
+      );
+
+      controlPlugin(coreControls);
     },
 
     /**
@@ -267,11 +253,11 @@ const burnout = () => {
      *
      */
 
-    getBlock: (positions) => {
+    getBlock: positions => {
       const newBlock = states.blocksRefs.filter((block) => {
 
         const stringPositions = stringifyPosition(positions)
-                                  .replace(/\s/g,''); // Remove whitespace
+                                 .replace(/\s/g,''); // Remove whitespace
 
         const blockStringPositions = block
                                       .style
