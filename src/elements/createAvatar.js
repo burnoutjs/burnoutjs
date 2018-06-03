@@ -21,8 +21,13 @@ const createAvatar = (configs, context = window) => {
 
   const avatar = context.document.createElement('div');
 
-  avatar.classList.add(configs.className);
-  avatar.style = stringifyPosition(configs.position);
+  if(configs.className) {
+    avatar.classList.add(configs.className);
+  }
+
+  if(configs.position) {
+    avatar.style = stringifyPosition(configs.position);
+  }
 
   return avatar;
 
