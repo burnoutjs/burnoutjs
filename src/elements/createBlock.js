@@ -23,8 +23,13 @@ const createBlock = (configs, context = window) => {
 
   const block = context.document.createElement('div');
 
-  block.classList.add(configs.className);
-  block.style = stringifyPosition(configs.position);
+  if(configs.className) {
+    block.classList.add(configs.className);
+  }
+
+  if(configs.position) {
+    block.style = stringifyPosition(configs.position);
+  }
 
   return block;
 

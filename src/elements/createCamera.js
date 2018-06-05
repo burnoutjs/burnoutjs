@@ -16,10 +16,12 @@ const createCamera = (configs, blockSize = 20, context = window) => {
 
   const camera = context.document.createElement('div');
 
-  camera.style = `
-    width: ${configs.cols * blockSize}px;
-    height: ${configs.rows * blockSize}px;
-  `;
+  if(configs) {
+    camera.style = `
+      width: ${configs.cols * blockSize}px;
+      height: ${configs.rows * blockSize}px;
+    `;
+  }
 
   return camera;
 

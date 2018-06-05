@@ -16,14 +16,16 @@ const createMap = (configs, blockSize = 20, context = window) => {
 
   const map = context.document.createElement('div');
 
-  map.style = `
-    display: grid;
-    grid-template-columns: repeat(${configs.cols}, ${blockSize}px);
-    grid-template-rows: repeat(${configs.rows}, ${blockSize}px);
-    width: ${configs.cols * blockSize}px;
-    height: ${configs.rows * blockSize}px;
-    overflow: hidden;
-  `;
+  if(configs) {
+    map.style = `
+      display: grid;
+      grid-template-columns: repeat(${configs.cols}, ${blockSize}px);
+      grid-template-rows: repeat(${configs.rows}, ${blockSize}px);
+      width: ${configs.cols * blockSize}px;
+      height: ${configs.rows * blockSize}px;
+      overflow: hidden;
+    `;
+  }
 
   return map;
 
