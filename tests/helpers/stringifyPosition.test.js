@@ -16,7 +16,7 @@ suite('stringifyPosition()', () => {
 
     const result = stringifyPosition(param);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect), 
       normalizeString(result)
     );

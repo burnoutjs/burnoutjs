@@ -14,7 +14,7 @@ suite('stringifyTranslate()', () => {
 
     const result = stringifyTranslate(param);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect), 
       normalizeString(result)
     );

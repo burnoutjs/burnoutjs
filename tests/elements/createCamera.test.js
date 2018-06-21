@@ -1,4 +1,4 @@
-import { suite, test, assert, normalizeString, mockWindow } from 'nomsjs';
+import { suite, test, assert, normalizeString, fakeWindow } from 'nomsjs';
 import createCamera from '../../src/elements/createCamera';
 
 suite('createCamera()', () => {
@@ -10,9 +10,9 @@ suite('createCamera()', () => {
 		const configs = {};
 		const blockSize = 20;
 
-    const camera = createCamera(configs, blockSize, mockWindow);
+    const camera = createCamera(configs, blockSize, fakeWindow);
 
-    return assert('DIV', camera.nodeName);
+    return assert.equal('DIV', camera.nodeName);
 
   });
 
@@ -32,9 +32,9 @@ suite('createCamera()', () => {
 
 		const blockSize = 10;
 
-		const camera = createCamera(configs, blockSize, mockWindow);
+		const camera = createCamera(configs, blockSize, fakeWindow);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect),
       normalizeString(camera.style)
     );

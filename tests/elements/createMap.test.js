@@ -1,4 +1,4 @@
-import { suite, test, assert, normalizeString, mockWindow } from 'nomsjs';
+import { suite, test, assert, normalizeString, fakeWindow } from 'nomsjs';
 import createMap from '../../src/elements/createMap';
 
 suite('createMap()', () => {
@@ -10,9 +10,9 @@ suite('createMap()', () => {
 		const configs = {};
 		const blockSize = 20;
 
-    const map = createMap(configs, blockSize, mockWindow);
+    const map = createMap(configs, blockSize, fakeWindow);
 
-    return assert('DIV', map.nodeName);
+    return assert.equal('DIV', map.nodeName);
 
   });
 
@@ -36,9 +36,9 @@ suite('createMap()', () => {
 
 		const blockSize = 10;
 
-		const map = createMap(configs, blockSize, mockWindow);
+		const map = createMap(configs, blockSize, fakeWindow);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect),
       normalizeString(map.style)
     );

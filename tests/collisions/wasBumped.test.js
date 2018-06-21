@@ -24,7 +24,7 @@ suite('wasBumped()', () => {
 
     const collision = wasBumped(currentPosition, blocksList);
 
-    return assert(true, collision.result);
+    return assert.isTrue(collision.result);
 
   });
 
@@ -49,7 +49,7 @@ suite('wasBumped()', () => {
 
     const collision = wasBumped(currentPosition, blocksList);
 
-    return assert(false, collision.result);
+    return assert.isFalse(collision.result);
 
   });
 
@@ -81,7 +81,7 @@ suite('wasBumped()', () => {
 
 		const collision = wasBumped(currentPosition, blocksList);
 
-		return assert(expect, collision.block);
+		return assert.objectEqual(expect, collision.block);
 
 	});
 
@@ -107,7 +107,7 @@ suite('wasBumped()', () => {
 
 		const collision = wasBumped(currentPosition, blocksList);
 
-		return assert(null, collision.block);
+		return assert.isFalse(collision.result);
 
 	});
 

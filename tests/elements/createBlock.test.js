@@ -1,4 +1,4 @@
-import { suite, test, assert, normalizeString, mockWindow } from 'nomsjs';
+import { suite, test, assert, normalizeString, fakeWindow } from 'nomsjs';
 import createBlock from '../../src/elements/createBlock';
 
 suite('createBlock()', () => {
@@ -8,9 +8,9 @@ suite('createBlock()', () => {
   test('Should return the correct element', () => {
 
     const param = {};
-    const block = createBlock(param, mockWindow);
+    const block = createBlock(param, fakeWindow);
 
-    return assert('DIV', block.nodeName);
+    return assert.equal('DIV', block.nodeName);
 
   });
 
@@ -22,9 +22,9 @@ suite('createBlock()', () => {
       className: 'demo',
     }
 
-    const block = createBlock(param, mockWindow);
+    const block = createBlock(param, fakeWindow);
 
-    return assert(['demo'], block.className);
+    return assert.arrayEqual(['demo'], block.className);
 
   });
 
@@ -43,9 +43,9 @@ suite('createBlock()', () => {
       }
     }
 
-    const block = createBlock(param, mockWindow);
+    const block = createBlock(param, fakeWindow);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect),
       normalizeString(block.style)
     );

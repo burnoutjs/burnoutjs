@@ -1695,9 +1695,9 @@ node-pre-gyp@^0.6.39:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-nomsjs@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/nomsjs/-/nomsjs-1.3.0.tgz#8eeb5ef0a65d868bf4f737a856eaa025b13bc931"
+nomsjs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/nomsjs/-/nomsjs-2.0.0.tgz#2c75770fc038464a4d6254df4b97380bf5aec687"
   dependencies:
     chalk "^2.3.2"
     clear "^0.1.0"

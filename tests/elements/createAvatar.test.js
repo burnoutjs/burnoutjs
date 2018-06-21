@@ -1,4 +1,4 @@
-import { suite, test, assert, normalizeString, mockWindow } from 'nomsjs';
+import { suite, test, assert, normalizeString, fakeWindow } from 'nomsjs';
 import createAvatar from '../../src/elements/createAvatar';
 
 suite('createAvatar()', () => {
@@ -8,9 +8,9 @@ suite('createAvatar()', () => {
   test('Should return the correct element', () => {
 
     const param = {};
-    const avatar = createAvatar(param, mockWindow);
+    const avatar = createAvatar(param, fakeWindow);
 
-    return assert('DIV', avatar.nodeName);
+    return assert.equal('DIV', avatar.nodeName);
 
   });
 
@@ -22,9 +22,9 @@ suite('createAvatar()', () => {
       className: 'demo',
     }
 
-    const avatar = createAvatar(param, mockWindow);
+    const avatar = createAvatar(param, fakeWindow);
 
-    return assert(['demo'], avatar.className);
+    return assert.arrayEqual(['demo'], avatar.className);
 
   });
 
@@ -43,9 +43,9 @@ suite('createAvatar()', () => {
       }
     }
 
-    const avatar = createAvatar(param, mockWindow);
+    const avatar = createAvatar(param, fakeWindow);
 
-    return assert(
+    return assert.equal(
       normalizeString(expect),
       normalizeString(avatar.style)
     );
