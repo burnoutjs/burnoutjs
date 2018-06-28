@@ -32,6 +32,7 @@ import stringifyPosition from '../helpers/stringifyPosition';
 
 // TODO: Refactor for improve performance in `map.style = map.style.cssText`.
 // TODO: Use meta programing.
+// TODO: Refactor for movements > controls
 
 const controls = (
   avatar,
@@ -96,7 +97,7 @@ const controls = (
 
       if (avatar.static) {
         states.currentCameraPosition.y += blockSize;
-        map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition); // Map movement
+        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
       }
 
       /**
@@ -133,59 +134,59 @@ const controls = (
       * Set the avatar side.
       */
 
-     const noDownSide = avatar.side && !(states.currentAvatarSide === 'down');
+      const noDownSide = avatar.side && !(states.currentAvatarSide === 'down');
 
-     if(noDownSide) {
-       avatar.ref.className = avatar.side.down;
-       states.currentAvatarSide = 'down';
-     }
+      if(noDownSide) {
+        avatar.ref.className = avatar.side.down;
+        states.currentAvatarSide = 'down';
+      }
 
-     /**
-     * Get the future position.
-     */
+      /**
+       * Get the future position.
+       */
 
-     const newPosition = moveDown(states.currentAvatarPosition);
+      const newPosition = moveDown(states.currentAvatarPosition);
 
-     /**
-     * Check collision.
-     */
+      /**
+       * Check collision.
+       */
 
-     const collision = wasBumped(newPosition, collisionBlocksPositions);
+      const collision = wasBumped(newPosition, collisionBlocksPositions);
 
-     if (collision.result) {
-       if(collision.block.action) {
-         collision.block.action(collision.block); // Collision callback
-       }
-       return false; // Stop movement
-     };
+      if (collision.result) {
+        if(collision.block.action) {
+          collision.block.action(collision.block); // Collision callback
+        }
+        return false; // Stop movement
+      };
 
-     /**
-     * Move map.
-     */
+      /**
+       * Move map.
+       */
 
-     if (avatar.static) {
-       states.currentCameraPosition.y -= blockSize;
-       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition); // Map movement
-     }
+      if (avatar.static) {
+        states.currentCameraPosition.y -= blockSize;
+        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+      }
 
-     /**
-     * Move avatar.
-     */
+      /**
+       * Move avatar.
+       */
 
-     avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-     states.currentAvatarPosition = newPosition;
+      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
+      states.currentAvatarPosition = newPosition;
 
-     /**
-     * Check over.
-     */
+      /**
+       * Check over.
+       */
 
-     const over = wasBumped(newPosition, overBlocksPositions);
+      const over = wasBumped(newPosition, overBlocksPositions);
 
-     if (over.result && over.block.action) {
-       over.block.action(over.block); // Over callback
-     };
+      if (over.result && over.block.action) {
+        over.block.action(over.block); // Over callback
+      };
 
-     return true;
+      return true;
 
     },
 
@@ -202,59 +203,59 @@ const controls = (
       * Set the avatar side.
       */
 
-     const noLeftSide = avatar.side && !(states.currentAvatarSide === 'left');
+      const noLeftSide = avatar.side && !(states.currentAvatarSide === 'left');
 
-     if(noLeftSide) {
-       avatar.ref.className = avatar.side.left;
-       states.currentAvatarSide = 'left';
-     }
+      if(noLeftSide) {
+        avatar.ref.className = avatar.side.left;
+        states.currentAvatarSide = 'left';
+      }
 
-     /**
-     * Get the future position.
-     */
+      /**
+       * Get the future position.
+       */
 
-     const newPosition = moveLeft(states.currentAvatarPosition);
+      const newPosition = moveLeft(states.currentAvatarPosition);
 
-     /**
-     * Check collision.
-     */
+      /**
+       * Check collision.
+       */
 
-     const collision = wasBumped(newPosition, collisionBlocksPositions);
+      const collision = wasBumped(newPosition, collisionBlocksPositions);
 
-     if (collision.result) {
-       if(collision.block.action) {
-         collision.block.action(collision.block); // Collision callback
-       }
-       return false; // Stop movement
-     };
+      if (collision.result) {
+        if(collision.block.action) {
+          collision.block.action(collision.block); // Collision callback
+        }
+        return false; // Stop movement
+      };
 
-     /**
-     * Move map.
-     */
+      /**
+       * Move map.
+       */
 
-     if (avatar.static) {
-       states.currentCameraPosition.x -= blockSize;
-       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition); // Map movement
-     }
+      if (avatar.static) {
+        states.currentCameraPosition.x -= blockSize;
+        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+      }
 
-     /**
-     * Move avatar.
-     */
+      /**
+       * Move avatar.
+       */
 
-     avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-     states.currentAvatarPosition = newPosition;
+      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
+      states.currentAvatarPosition = newPosition;
 
-     /**
-     * Check over.
-     */
+      /**
+       * Check over.
+       */
 
-     const over = wasBumped(newPosition, overBlocksPositions);
+      const over = wasBumped(newPosition, overBlocksPositions);
 
-     if (over.result && over.block.action) {
-       over.block.action(over.block); // Over callback
-     };
+      if (over.result && over.block.action) {
+        over.block.action(over.block); // Over callback
+      };
 
-     return true;
+      return true;
 
     },
 
@@ -266,63 +267,64 @@ const controls = (
      */
 
     right: () => {
+
       /**
       * Set the avatar side.
       */
 
-     const noRightSide = avatar.side && !(states.currentAvatarSide === 'right');
+        const noRightSide = avatar.side && !(states.currentAvatarSide === 'right');
 
-     if(noRightSide) {
-       avatar.ref.className = avatar.side.right;
-       states.currentAvatarSide = 'right';
-     }
+      if(noRightSide) {
+        avatar.ref.className = avatar.side.right;
+        states.currentAvatarSide = 'right';
+      }
 
-     /**
-     * Get the future position.
-     */
+      /**
+       * Get the future position.
+       */
 
-     const newPosition = moveRight(states.currentAvatarPosition);
+      const newPosition = moveRight(states.currentAvatarPosition);
 
-     /**
-     * Check collision.
-     */
+      /**
+       * Check collision.
+       */
 
-     const collision = wasBumped(newPosition, collisionBlocksPositions);
+      const collision = wasBumped(newPosition, collisionBlocksPositions);
 
-     if (collision.result) {
-       if(collision.block.action) {
-         collision.block.action(collision.block); // Collision callback
-       }
-       return false; // Stop movement
-     };
+      if (collision.result) {
+        if(collision.block.action) {
+          collision.block.action(collision.block); // Collision callback
+        }
+        return false; // Stop movement
+      };
 
-     /**
-     * Move map.
-     */
+      /**
+       * Move map.
+       */
 
-     if (avatar.static) {
-       states.currentCameraPosition.x += blockSize;
-       map.style = map.style.cssText + stringifyTranslate(states.currentCameraPosition); // Map movement
-     }
+      if (avatar.static) {
+        states.currentCameraPosition.x += blockSize;
+        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+      }
 
-     /**
-     * Move avatar.
-     */
+      /**
+       * Move avatar.
+       */
 
-     avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-     states.currentAvatarPosition = newPosition;
+      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
+      states.currentAvatarPosition = newPosition;
 
-     /**
-     * Check over.
-     */
+      /**
+       * Check over.
+       */
 
-     const over = wasBumped(newPosition, overBlocksPositions);
+      const over = wasBumped(newPosition, overBlocksPositions);
 
-     if (over.result && over.block.action) {
-       over.block.action(over.block); // Over callback
-     };
+      if (over.result && over.block.action) {
+        over.block.action(over.block); // Over callback
+      };
 
-     return true;
+      return true;
 
     },
 

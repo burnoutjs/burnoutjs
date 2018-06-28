@@ -14,3 +14,6 @@ import './elements/createMap.test.js';
 // helpers
 import './helpers/stringifyPosition.test.js';
 import './helpers/stringifyTranslate.test.js';
+
+// controls
+import './controls/controls.test.js';
