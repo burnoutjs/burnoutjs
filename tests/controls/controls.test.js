@@ -1,8 +1,8 @@
 import { suite, test, assert, normalizeString } from 'nomsjs';
 import movementParams from './test_mocks/movementParams';
-import controls from '../../src/controls/controls';
+import movements from '../../src/controls/movements';
 
-suite('controls()', () => {
+suite('movements()', () => {
 
 	// -----------------------------------------
 	// Setup
@@ -12,7 +12,7 @@ suite('controls()', () => {
 	// Basic setup
 	// ------------------
 
-	const setupControls = params => controls(
+	const setupControls = params => movements(
 		params.avatar,
 		params.mapRef,
 		[],
@@ -24,7 +24,7 @@ suite('controls()', () => {
 	// Setup with collisions blocks
 	// ------------------
 
-	const setupControlsWithCollisionBlocks = params => controls(
+	const setupControlsWithCollisionBlocks = params => movements(
 		params.avatar,
 		params.mapRef,
 		params.collisionBlocksPositions,
@@ -36,7 +36,7 @@ suite('controls()', () => {
 	// Setup with collisions blocks
 	// ------------------
 
-	const setupControlsWithOverBlocks = params => controls(
+	const setupControlsWithOverBlocks = params => movements(
 		params.avatar,
 		params.mapRef,
 		[],

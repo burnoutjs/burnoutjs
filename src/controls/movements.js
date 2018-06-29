@@ -8,7 +8,7 @@ import stringifyPosition from '../helpers/stringifyPosition';
 
 /**
  * Create all core controls and expose for plugins.
- * @module controls/controls
+ * @module controls/movements
  *
  * @param {object} avatar - All Avatar configs.
  * @param {object} avatar.ref - Avatar DOM reference.
@@ -32,9 +32,8 @@ import stringifyPosition from '../helpers/stringifyPosition';
 
 // TODO: Refactor for improve performance in `map.style = map.style.cssText`.
 // TODO: Use meta programing.
-// TODO: Refactor for movements > controls
 
-const controls = (
+const movements = (
   avatar,
   map,
   collisionBlocksPositions,
@@ -396,4 +395,4 @@ const controls = (
 
 };
 
-export default controls;
+export default movements;

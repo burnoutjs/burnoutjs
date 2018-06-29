@@ -2,7 +2,7 @@ import createMap from './elements/createMap';
 import createCamera from './elements/createCamera';
 import createBlock from './elements/createBlock';
 import createAvatar from './elements/createAvatar';
-import controls from './controls/controls';
+import movements from './controls/movements';
 import stringifyPosition from './helpers/stringifyPosition';
 
 /**
@@ -193,7 +193,7 @@ const burnout = () => {
         return console.error('Burnout: No plugin added in defineControls() method');
       }
 
-      const coreControls = controls(
+      const coreControls = movements(
         states.avatar,
         states.mapRef,
         states.collisionBlocksPositions,
