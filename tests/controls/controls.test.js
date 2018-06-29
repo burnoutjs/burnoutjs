@@ -1,6 +1,5 @@
-import { suite, test, assert, normalizeString, fakeWindow } from 'nomsjs';
+import { suite, test, assert, normalizeString } from 'nomsjs';
 import movementParams from './test_mocks/movementParams';
-import clone from './test_helpers/clone';
 import controls from '../../src/controls/controls';
 
 suite('controls()', () => {
@@ -45,76 +44,6 @@ suite('controls()', () => {
 		params.blockSize
 	)
 
-	// Global Mocks data
-  // ------------------------------------
-
-	// const fakeAvatarRef = () => {
-	// 	const avatar = fakeWindow.document.createElement('div');
-	// 	avatar.classList.add('aaa')
-	// 	return avatar;
-	// }
-
-	// const fakeAvatar = {
-	// 	ref: fakeAvatarRef(),
-	// 	static: true,
-	// 	startPosition: { rowStart: 1, columnStart: 1, rowEnd: 2, columnEnd: 2, },
-	// 	side: { up: 'side-up', down: 'side-down', left: 'side-left', right: 'side-right', }
-	// }
-
-	// const fakeCollisionBlocks = [
-	// 	{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, },
-	// 	{ rowStart: 3, columnStart: 3, rowEnd: 4, columnEnd: 4, }
-	// ];
-
-	// const fakeOverBlocks = [
-	// 	{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, },
-	// 	{ rowStart: 3, columnStart: 3, rowEnd: 4, columnEnd: 4, }
-	// ];
-
-	// const fakeStates = {
-	// 	avatar: fakeAvatar,
-	// 	mapRef: fakeWindow.document.createElement('div'),
-	// 	collisionBlocksPositions: fakeCollisionBlocks,
-	// 	overBlocksPositions: fakeOverBlocks,
-	// 	blockSize: '10px',
-	// }
-
-	// const move = controls(
-	// 	fakeStates.avatar,
-	// 	fakeStates.mapRef,
-	// 	fakeStates.collisionBlocksPositions,
-	// 	fakeStates.overBlocksPositions,
-	// 	fakeStates.blockSize
-	// )
-
-  test('Should create all core controls', () => {
-
-		// --------- Controls
-
-		// console.log(move.right());
-		// console.log(move.up());
-		// console.log(move.up());
-
-		// --------- Actions
-
-		//coreControls.up();
-		// coreControls.down();
-		// coreControls.left();
-		// coreControls.right();
-		
-		// --------- Results
-
-		//false // movement false
-		//true // movement true
-
-		//avatar.ref.className // avatar side class
-		//map.style.cssText // map position
-		//avatar.ref.style.cssText // avatar position
-
-    // return assert('DIV', avatar.nodeName);
-
-  });
-
 	// -----------------------------------------
 	// Avatar side
 	// -----------------------------------------
@@ -127,7 +56,7 @@ suite('controls()', () => {
 
 		test('Should change the avatar side (CSS class) to up during first movement', () => {
 	
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.up();
@@ -145,7 +74,7 @@ suite('controls()', () => {
 
 		test('Should change the avatar side (CSS class) to down during first movement', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.down();
@@ -163,7 +92,7 @@ suite('controls()', () => {
 
 		test('Should change the avatar side (CSS class) to left during first movement', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.left();
@@ -181,7 +110,7 @@ suite('controls()', () => {
 
 		test('Should change the avatar side (CSS class) to right during first movement', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.right();
@@ -207,7 +136,7 @@ suite('controls()', () => {
 
 		test('Should keep the avatar side (CSS class) during movements (up) for the same direction', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.left();
@@ -227,7 +156,7 @@ suite('controls()', () => {
 
 		test('Should keep the avatar side (CSS class) during movements (down) for the same direction', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.left();
@@ -247,7 +176,7 @@ suite('controls()', () => {
 
 		test('Should keep the avatar side (CSS class) during movements (left) for the same direction', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.up();
@@ -267,7 +196,7 @@ suite('controls()', () => {
 
 		test('Should keep the avatar side (CSS class) during movements (down) for the same direction', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			move.left();
@@ -284,10 +213,10 @@ suite('controls()', () => {
 	});
 
 	// -----------------------------------------
-	// Move avatar (static: false)
+	// Move avatar (static: true)
 	// -----------------------------------------
 
-	suite('Move avatar (static: false)', () => {
+	suite('Move avatar (static: true)', () => {
 
 		// ------------------
 		// Move avatar up()
@@ -295,7 +224,7 @@ suite('controls()', () => {
 
 		test('Should move the avatar for a new position (up)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -317,7 +246,7 @@ suite('controls()', () => {
 
 		test('Should move the avatar for a new position (down)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -339,7 +268,7 @@ suite('controls()', () => {
 
 		test('Should move the avatar for a new position (left)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -361,7 +290,7 @@ suite('controls()', () => {
 
 		test('Should move the avatar for a new position (right)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -391,7 +320,7 @@ suite('controls()', () => {
 
 		test('Should move the map for a new position (up)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Map start position: 'translate(0px, 0px);'
@@ -413,7 +342,7 @@ suite('controls()', () => {
 
 		test('Should move the map for a new position (down)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Map start position: 'translate(0px, 0px);'
@@ -435,7 +364,7 @@ suite('controls()', () => {
 
 		test('Should move the map for a new position (left)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Map start position: 'translate(0px, 0px);'
@@ -457,7 +386,7 @@ suite('controls()', () => {
 
 		test('Should move the map for a new position (right)', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControls(scopedParams);
 
 			// Map start position: 'translate(0px, 0px);'
@@ -475,11 +404,19 @@ suite('controls()', () => {
 
 	});
 
-	suite('Not movement', () => {
+	// -----------------------------------------
+	// Collision
+	// -----------------------------------------
+
+	suite('Not movement (collision)', () => {
+
+		// ------------------
+		// Collision up()
+		// ------------------
 
 		test('Do not move to direction (up) where there are registered collision blocks', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControlsWithCollisionBlocks(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -495,9 +432,13 @@ suite('controls()', () => {
 
 		});
 
+		// ------------------
+		// Collision down()
+		// ------------------
+
 		test('Do not move to direction (down) where there are registered collision blocks', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControlsWithCollisionBlocks(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -513,9 +454,13 @@ suite('controls()', () => {
 
 		});
 
+		// ------------------
+		// Collision left()
+		// ------------------
+
 		test('Do not move to direction (left) where there are registered collision blocks', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControlsWithCollisionBlocks(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -531,9 +476,13 @@ suite('controls()', () => {
 
 		});
 
+		// ------------------
+		// Collision right()
+		// ------------------
+
 		test('Do not move to direction (right) where there are registered collision blocks', () => {
 
-			let scopedParams = clone(movementParams);
+			let scopedParams = movementParams();
 			const move = setupControlsWithCollisionBlocks(scopedParams);
 
 			// Avatar start position: 2 / 2 / 3 / 3
@@ -551,9 +500,164 @@ suite('controls()', () => {
 
 	});
 
+	// -----------------------------------------
+	// Collision callbacks
+	// -----------------------------------------
 
-	test('If exist, should return a collision callback function', () => {});
+	suite('Collision callbacks', () => {
 
-	test('If the new position is registered like a over block, should return the over callback', () => {});
+		// ------------------
+		// Collision callback up()
+		// ------------------
+
+		test('When it collides (up) should return a collision callback function (if exist)', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithCollisionBlocks(scopedParams);
+
+			const collidedBlockPosition = move.up();
+			const expectedBlockPosition = { rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedBlockPosition, collidedBlockPosition);
+
+		});
+
+		// ------------------
+		// Collision callback down()
+		// ------------------
+
+		test('When it collides (down) should return a collision callback function (if exist)', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithCollisionBlocks(scopedParams);
+
+			const collidedBlockPosition = move.down();
+			const expectedBlockPosition = { rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedBlockPosition, collidedBlockPosition);
+
+		});
+
+		// ------------------
+		// Collision callback left()
+		// ------------------
+
+		test('When it collides (left) should return a collision callback function (if exist)', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithCollisionBlocks(scopedParams);
+
+			const collidedBlockPosition = move.left();
+			const expectedBlockPosition = { rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedBlockPosition, collidedBlockPosition);
+
+		});
+
+		// ------------------
+		// Collision callback right()
+		// ------------------
+
+		test('When it collides (right) should return a collision callback function (if exist)', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithCollisionBlocks(scopedParams);
+
+			const collidedBlockPosition = move.right();
+			const expectedBlockPosition = { rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedBlockPosition, collidedBlockPosition);
+
+		});
+
+	});
+
+	// -----------------------------------------
+	// Over callbacks
+	// -----------------------------------------
+
+	suite('Over callbacks', () => {
+
+		// ------------------
+		// Over callback up()
+		// ------------------
+
+		test('If the new position (up) is registered like a over block, should return the over callback', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithOverBlocks(scopedParams);
+
+			const collidedOverPosition = move.up();
+			const expectedOverPosition = { rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedOverPosition, collidedOverPosition);
+
+		});
+
+		// ------------------
+		// Over callback down()
+		// ------------------
+
+		test('If the new position (down) is registered like a over block, should return the over callback', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithOverBlocks(scopedParams);
+
+			const collidedOverPosition = move.down();
+			const expectedOverPosition = { rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedOverPosition, collidedOverPosition);
+
+		});
+
+		// ------------------
+		// Over callback left()
+		// ------------------
+
+		test('If the new position (left) is registered like a over block, should return the over callback', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithOverBlocks(scopedParams);
+
+			const collidedOverPosition = move.left();
+			const expectedOverPosition = { rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedOverPosition, collidedOverPosition);
+
+		});
+
+		// ------------------
+		// Over callback right()
+		// ------------------
+
+		test('If the new position (right) is registered like a over block, should return the over callback', () => {
+
+			let scopedParams = movementParams();
+			const move = setupControlsWithOverBlocks(scopedParams);
+
+			const collidedOverPosition = move.right();
+			const expectedOverPosition = { rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4 };
+
+			scopedParams = null; // Garbage collector ;)
+
+			return assert.objectEqual(expectedOverPosition, collidedOverPosition);
+
+		});
+
+	});
 
 });

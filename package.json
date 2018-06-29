@@ -33,7 +33,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "eslint-plugin-html": "^4.0.3",
-    "esm": "^3.0.45",
+    "esm": "^3.0.55",
     "jsdoc": "^3.5.3",
     "nomsjs": "^2.0.0",
     "rollup": "^0.45.2",

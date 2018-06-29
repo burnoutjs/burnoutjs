@@ -86,7 +86,15 @@ const controls = (
 
       if (collision.result) {
         if(collision.block.action) {
-          collision.block.action(collision.block); // Collision callback
+
+          const onlyBlockPositions = {
+            rowStart: collision.block.rowStart, 
+            columnStart: collision.block.columnStart, 
+            rowEnd: collision.block.rowEnd, 
+            columnEnd: collision.block.columnEnd,
+          }
+
+          return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
       };
@@ -114,7 +122,15 @@ const controls = (
       const over = wasBumped(newPosition, overBlocksPositions);
 
       if (over.result && over.block.action) {
-        over.block.action(over.block); // Over callback
+
+        const onlyBlockPositions = {
+          rowStart: over.block.rowStart, 
+          columnStart: over.block.columnStart, 
+          rowEnd: over.block.rowEnd, 
+          columnEnd: over.block.columnEnd,
+        }
+
+        return over.block.action(onlyBlockPositions); // Over callback
       };
 
       return true;
@@ -155,7 +171,15 @@ const controls = (
 
       if (collision.result) {
         if(collision.block.action) {
-          collision.block.action(collision.block); // Collision callback
+
+          const onlyBlockPositions = {
+            rowStart: collision.block.rowStart, 
+            columnStart: collision.block.columnStart, 
+            rowEnd: collision.block.rowEnd, 
+            columnEnd: collision.block.columnEnd,
+          }
+
+          return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
       };
@@ -183,7 +207,15 @@ const controls = (
       const over = wasBumped(newPosition, overBlocksPositions);
 
       if (over.result && over.block.action) {
-        over.block.action(over.block); // Over callback
+
+        const onlyBlockPositions = {
+          rowStart: over.block.rowStart, 
+          columnStart: over.block.columnStart, 
+          rowEnd: over.block.rowEnd, 
+          columnEnd: over.block.columnEnd,
+        }
+
+        return over.block.action(onlyBlockPositions); // Over callback
       };
 
       return true;
@@ -224,7 +256,15 @@ const controls = (
 
       if (collision.result) {
         if(collision.block.action) {
-          collision.block.action(collision.block); // Collision callback
+
+          const onlyBlockPositions = {
+            rowStart: collision.block.rowStart, 
+            columnStart: collision.block.columnStart, 
+            rowEnd: collision.block.rowEnd, 
+            columnEnd: collision.block.columnEnd,
+          }
+
+          return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
       };
@@ -252,7 +292,15 @@ const controls = (
       const over = wasBumped(newPosition, overBlocksPositions);
 
       if (over.result && over.block.action) {
-        over.block.action(over.block); // Over callback
+
+        const onlyBlockPositions = {
+          rowStart: over.block.rowStart, 
+          columnStart: over.block.columnStart, 
+          rowEnd: over.block.rowEnd, 
+          columnEnd: over.block.columnEnd,
+        }
+
+        return over.block.action(onlyBlockPositions); // Over callback
       };
 
       return true;
@@ -293,7 +341,15 @@ const controls = (
 
       if (collision.result) {
         if(collision.block.action) {
-          collision.block.action(collision.block); // Collision callback
+
+          const onlyBlockPositions = {
+            rowStart: collision.block.rowStart, 
+            columnStart: collision.block.columnStart, 
+            rowEnd: collision.block.rowEnd, 
+            columnEnd: collision.block.columnEnd,
+          }
+
+          return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
       };
@@ -321,7 +377,15 @@ const controls = (
       const over = wasBumped(newPosition, overBlocksPositions);
 
       if (over.result && over.block.action) {
-        over.block.action(over.block); // Over callback
+
+        const onlyBlockPositions = {
+          rowStart: over.block.rowStart, 
+          columnStart: over.block.columnStart, 
+          rowEnd: over.block.rowEnd, 
+          columnEnd: over.block.columnEnd,
+        }
+
+        return over.block.action(onlyBlockPositions); // Over callback
       };
 
       return true;

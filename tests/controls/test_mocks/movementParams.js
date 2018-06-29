@@ -23,17 +23,17 @@ const movementParams = () => {
 	const fakeMapRef = fakeWindow.document.createElement('div');
 
 	const fakeCollisionBlocks = [
-		{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, },
-		{ rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3, },
-		{ rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4, },
-		{ rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2, }
+		{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, action: blockPosition => blockPosition },
+		{ rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3, action: blockPosition => blockPosition },
+		{ rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4, action: blockPosition => blockPosition },
+		{ rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2, action: blockPosition => blockPosition }
 	];
 
 	const fakeOverBlocks = [
-		{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, },
-		{ rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3, },
-		{ rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4, },
-		{ rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2, }
+		{ rowStart: 1, columnStart: 2, rowEnd: 2, columnEnd: 3, action: overPosition => overPosition },
+		{ rowStart: 3, columnStart: 2, rowEnd: 4, columnEnd: 3, action: overPosition => overPosition },
+		{ rowStart: 2, columnStart: 3, rowEnd: 3, columnEnd: 4, action: overPosition => overPosition },
+		{ rowStart: 2, columnStart: 1, rowEnd: 3, columnEnd: 2, action: overPosition => overPosition }
 	];
 
 	return {
@@ -46,4 +46,4 @@ const movementParams = () => {
 
 };
 
-export default movementParams();
+export default movementParams;
