@@ -1,10 +1,8 @@
-import moveUp from './helpers/moveUp';
-import moveDown from './helpers/moveDown';
-import moveLeft from './helpers/moveLeft';
-import moveRight from './helpers/moveRight';
+import allAxis from './helpers/allAxis';
 import wasBumped from '../collisions/wasBumped';
 import stringifyTranslate from '../helpers/stringifyTranslate';
 import stringifyPosition from '../helpers/stringifyPosition';
+import getBlockPositions from './helpers/getBlockPositions';
 
 /**
  * Create all core controls and expose for plugins.
@@ -28,10 +26,9 @@ import stringifyPosition from '../helpers/stringifyPosition';
  * @param {array} overBlocksPositions - List of blocks to over.
  * @param {number} blockSize - Size of all grid blocks.
  *
+ * @returns {object} All movements methods.
+ * 
  */
-
-// TODO: Refactor for improve performance in `map.style = map.style.cssText`.
-// TODO: Use meta programing.
 
 const movements = (
   avatar,
@@ -39,6 +36,10 @@ const movements = (
   collisionBlocksPositions,
   overBlocksPositions,
   blockSize) => {
+
+  // -----------------------------------------
+  // Movements local states
+  // -----------------------------------------
 
   const states = {
     currentAvatarPosition: avatar.startPosition,
@@ -49,348 +50,98 @@ const movements = (
     },
   };
 
-  return {
+  // -----------------------------------------
+  // Single movement function
+  // -----------------------------------------
 
-    /**
-     * Up movement core engine.
-     *
-     * @returns {boolean} The movement result.
-     *
-     */
+  /**
+   * Create a single movement method.
+   *
+   * @param {object} axis - A single axis config.
+   * @param {string} axis.side - The axis direction.
+   * @param {function} axis.movement - The (grid position) movement method.
+   * @param {function} axis.updatedCameraPositionState - Update camera position state method.
+   *
+   * @returns {function} A single game movement.
+   * 
+   */
 
-    up: () => {
+  const movement = axis => {
+
+    return () => {
 
       /**
       * Set the avatar side.
       */
-
-      const noUpSide = avatar.side && !(states.currentAvatarSide === 'up');
-
+  
+      const noUpSide = avatar.side && !(states.currentAvatarSide === axis.side);
+  
       if(noUpSide) {
-        avatar.ref.className = avatar.side.up;
-        states.currentAvatarSide = 'up';
+        avatar.ref.className = avatar.side[axis.side];
+        states.currentAvatarSide = axis.side;
       }
-
+  
       /**
       * Get the future position.
       */
-
-      const newPosition = moveUp(states.currentAvatarPosition);
-
+  
+      const newPosition = axis.movement(states.currentAvatarPosition);
+  
       /**
       * Check collision.
       */
-
+  
       const collision = wasBumped(newPosition, collisionBlocksPositions);
-
+  
       if (collision.result) {
         if(collision.block.action) {
-
-          const onlyBlockPositions = {
-            rowStart: collision.block.rowStart, 
-            columnStart: collision.block.columnStart, 
-            rowEnd: collision.block.rowEnd, 
-            columnEnd: collision.block.columnEnd,
-          }
-
+          const onlyBlockPositions = getBlockPositions(collision.block);  
           return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
       };
-
+  
       /**
       * Move map.
       */
-
+  
       if (avatar.static) {
-        states.currentCameraPosition.y += blockSize;
+        axis.updatedCameraPositionState(states.currentCameraPosition, blockSize);
         map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
       }
-
+  
       /**
       * Move avatar.
       */
-
+  
       avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
       states.currentAvatarPosition = newPosition;
-
+  
       /**
       * Check over.
       */
-
+  
       const over = wasBumped(newPosition, overBlocksPositions);
-
+  
       if (over.result && over.block.action) {
-
-        const onlyBlockPositions = {
-          rowStart: over.block.rowStart, 
-          columnStart: over.block.columnStart, 
-          rowEnd: over.block.rowEnd, 
-          columnEnd: over.block.columnEnd,
-        }
-
+        const onlyBlockPositions =  getBlockPositions(over.block)
         return over.block.action(onlyBlockPositions); // Over callback
       };
-
+  
       return true;
-
-    },
-
-    /**
-     * Down movement core engine.
-     *
-     * @returns {boolean} The movement result.
-     *
-     */
-
-    down: () => {
-
-      /**
-      * Set the avatar side.
-      */
-
-      const noDownSide = avatar.side && !(states.currentAvatarSide === 'down');
-
-      if(noDownSide) {
-        avatar.ref.className = avatar.side.down;
-        states.currentAvatarSide = 'down';
-      }
-
-      /**
-       * Get the future position.
-       */
-
-      const newPosition = moveDown(states.currentAvatarPosition);
-
-      /**
-       * Check collision.
-       */
-
-      const collision = wasBumped(newPosition, collisionBlocksPositions);
-
-      if (collision.result) {
-        if(collision.block.action) {
-
-          const onlyBlockPositions = {
-            rowStart: collision.block.rowStart, 
-            columnStart: collision.block.columnStart, 
-            rowEnd: collision.block.rowEnd, 
-            columnEnd: collision.block.columnEnd,
-          }
-
-          return collision.block.action(onlyBlockPositions); // Collision callback
-        }
-        return false; // Stop movement
-      };
-
-      /**
-       * Move map.
-       */
-
-      if (avatar.static) {
-        states.currentCameraPosition.y -= blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
-      }
-
-      /**
-       * Move avatar.
-       */
-
-      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-      states.currentAvatarPosition = newPosition;
-
-      /**
-       * Check over.
-       */
-
-      const over = wasBumped(newPosition, overBlocksPositions);
-
-      if (over.result && over.block.action) {
-
-        const onlyBlockPositions = {
-          rowStart: over.block.rowStart, 
-          columnStart: over.block.columnStart, 
-          rowEnd: over.block.rowEnd, 
-          columnEnd: over.block.columnEnd,
-        }
-
-        return over.block.action(onlyBlockPositions); // Over callback
-      };
-
-      return true;
-
-    },
-
-    /**
-     * Left movement core engine.
-     *
-     * @returns {boolean} The movement result.
-     *
-     */
-
-    left: () => {
-
-      /**
-      * Set the avatar side.
-      */
-
-      const noLeftSide = avatar.side && !(states.currentAvatarSide === 'left');
-
-      if(noLeftSide) {
-        avatar.ref.className = avatar.side.left;
-        states.currentAvatarSide = 'left';
-      }
-
-      /**
-       * Get the future position.
-       */
-
-      const newPosition = moveLeft(states.currentAvatarPosition);
-
-      /**
-       * Check collision.
-       */
-
-      const collision = wasBumped(newPosition, collisionBlocksPositions);
-
-      if (collision.result) {
-        if(collision.block.action) {
-
-          const onlyBlockPositions = {
-            rowStart: collision.block.rowStart, 
-            columnStart: collision.block.columnStart, 
-            rowEnd: collision.block.rowEnd, 
-            columnEnd: collision.block.columnEnd,
-          }
-
-          return collision.block.action(onlyBlockPositions); // Collision callback
-        }
-        return false; // Stop movement
-      };
-
-      /**
-       * Move map.
-       */
-
-      if (avatar.static) {
-        states.currentCameraPosition.x += blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
-      }
-
-      /**
-       * Move avatar.
-       */
-
-      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-      states.currentAvatarPosition = newPosition;
-
-      /**
-       * Check over.
-       */
-
-      const over = wasBumped(newPosition, overBlocksPositions);
-
-      if (over.result && over.block.action) {
-
-        const onlyBlockPositions = {
-          rowStart: over.block.rowStart, 
-          columnStart: over.block.columnStart, 
-          rowEnd: over.block.rowEnd, 
-          columnEnd: over.block.columnEnd,
-        }
-
-        return over.block.action(onlyBlockPositions); // Over callback
-      };
-
-      return true;
-
-    },
-
-    /**
-     * Right movement core engine.
-     *
-     * @returns {boolean} The movement result.
-     *
-     */
-
-    right: () => {
-
-      /**
-      * Set the avatar side.
-      */
-
-        const noRightSide = avatar.side && !(states.currentAvatarSide === 'right');
-
-      if(noRightSide) {
-        avatar.ref.className = avatar.side.right;
-        states.currentAvatarSide = 'right';
-      }
-
-      /**
-       * Get the future position.
-       */
-
-      const newPosition = moveRight(states.currentAvatarPosition);
-
-      /**
-       * Check collision.
-       */
-
-      const collision = wasBumped(newPosition, collisionBlocksPositions);
-
-      if (collision.result) {
-        if(collision.block.action) {
-
-          const onlyBlockPositions = {
-            rowStart: collision.block.rowStart, 
-            columnStart: collision.block.columnStart, 
-            rowEnd: collision.block.rowEnd, 
-            columnEnd: collision.block.columnEnd,
-          }
-
-          return collision.block.action(onlyBlockPositions); // Collision callback
-        }
-        return false; // Stop movement
-      };
-
-      /**
-       * Move map.
-       */
-
-      if (avatar.static) {
-        states.currentCameraPosition.x -= blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
-      }
-
-      /**
-       * Move avatar.
-       */
-
-      avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-      states.currentAvatarPosition = newPosition;
-
-      /**
-       * Check over.
-       */
-
-      const over = wasBumped(newPosition, overBlocksPositions);
-
-      if (over.result && over.block.action) {
-
-        const onlyBlockPositions = {
-          rowStart: over.block.rowStart, 
-          columnStart: over.block.columnStart, 
-          rowEnd: over.block.rowEnd, 
-          columnEnd: over.block.columnEnd,
-        }
-
-        return over.block.action(onlyBlockPositions); // Over callback
-      };
-
-      return true;
-
-    },
-
+  
+    }
+  }
+
+  // -----------------------------------------
+  // All movements methods
+  // -----------------------------------------
+
+  return {
+    up: movement(allAxis[0]),
+    down: movement(allAxis[1]),
+    left: movement(allAxis[2]),
+    right: movement(allAxis[3]),
   }
 
 };
