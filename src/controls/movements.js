@@ -189,7 +189,7 @@ const movements = (
 
       if (avatar.static) {
         states.currentCameraPosition.y -= blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
       }
 
       /**
@@ -273,8 +273,8 @@ const movements = (
        */
 
       if (avatar.static) {
-        states.currentCameraPosition.x -= blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+        states.currentCameraPosition.x += blockSize;
+        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
       }
 
       /**
@@ -358,8 +358,8 @@ const movements = (
        */
 
       if (avatar.static) {
-        states.currentCameraPosition.x += blockSize;
-        map.style.transform = stringifyTranslate(states.currentCameraPosition);
+        states.currentCameraPosition.x -= blockSize;
+        map.style.transform = stringifyTranslate(states.currentCameraPosition); // Map movement
       }
 
       /**

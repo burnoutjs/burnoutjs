@@ -327,7 +327,7 @@ suite('movements()', () => {
 
 			move.up();
 
-			const expectedPosition = normalizeString('translate(0px, 10px);');
+			const expectedPosition = normalizeString('translate(0px, 10px)');
 			const currentMapPosition = normalizeString(scopedParams.mapRef.style.transform);
 
 			scopedParams = null; // Garbage collector ;)
@@ -349,7 +349,7 @@ suite('movements()', () => {
 
 			move.down();
 
-			const expectedPosition = normalizeString('translate(0px, -10px);');
+			const expectedPosition = normalizeString('translate(0px, -10px)');
 			const currentMapPosition = normalizeString(scopedParams.mapRef.style.transform);
 
 			scopedParams = null; // Garbage collector ;)
@@ -371,7 +371,7 @@ suite('movements()', () => {
 
 			move.left();
 
-			const expectedPosition = normalizeString('translate(-10px, 0px);');
+			const expectedPosition = normalizeString('translate(10px, 0px)');
 			const currentMapPosition = normalizeString(scopedParams.mapRef.style.transform);
 
 			scopedParams = null; // Garbage collector ;)
@@ -393,7 +393,7 @@ suite('movements()', () => {
 
 			move.right();
 
-			const expectedPosition = normalizeString('translate(10px, 0px);');
+			const expectedPosition = normalizeString('translate(-10px, 0px)');
 			const currentMapPosition = normalizeString(scopedParams.mapRef.style.transform);
 
 			scopedParams = null; // Garbage collector ;)

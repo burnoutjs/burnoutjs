@@ -13,11 +13,11 @@
  */
 
 const stringifyPosition = position => {
-  return `grid-area: 
-            ${position.rowStart} / 
-            ${position.columnStart} /
-            ${position.rowEnd} /
-            ${position.columnEnd}`;
+  return `grid-area:
+    ${position.rowStart} / 
+    ${position.columnStart} / 
+    ${position.rowEnd} / 
+    ${position.columnEnd}`;
 };
 
 export default stringifyPosition;

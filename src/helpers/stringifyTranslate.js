@@ -11,7 +11,7 @@
  */
 
 const stringifyTranslate = translate => {
-  return `translate(${translate.x}px, ${translate.y}px);`;
+  return `translate(${translate.x}px, ${translate.y}px)`;
 };
 
 export default stringifyTranslate;

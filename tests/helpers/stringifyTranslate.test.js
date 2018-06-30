@@ -5,7 +5,7 @@ suite('stringifyTranslate()', () => {
 
   test('Should return a CSS transform (string) with X and Y positions', () => {
 
-    const expect =`translate(10px, 20px);`;
+    const expect =`translate(10px, 20px)`;
 
     const param = {
       x: 10,
