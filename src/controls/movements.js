@@ -68,15 +68,19 @@ const movements = (
 
   const movement = axis => {
 
+    // ------------------
+    // For help, see the flowchart algorithm in docs/flowcharts/01-movement.jpeg
+    // ------------------
+
     return () => {
 
       /**
       * Set the avatar side.
       */
   
-      const noUpSide = avatar.side && !(states.currentAvatarSide === axis.side);
+      const noAxisSide = avatar.side && !(states.currentAvatarSide === axis.side);
   
-      if(noUpSide) {
+      if(noAxisSide) {
         avatar.ref.className = avatar.side[axis.side];
         states.currentAvatarSide = axis.side;
       }
