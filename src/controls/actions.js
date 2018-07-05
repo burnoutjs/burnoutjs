@@ -9,12 +9,13 @@ import getBlockPositions from './helpers/getBlockPositions';
  * Create all core actions methods and expose for plugins.
  * @module controls/actions
  *
- * @param {string} avatarCurrentSide - The avatar current side.
- * @param {object} avatarCurrentPositions - Avatar position in map.
- * @param {number} avatarCurrentPositions.rowStart - Start row position.
- * @param {number} avatarCurrentPositions.columnStart - Start column position.
- * @param {number} avatarCurrentPositions.rowEnd - End row position.
- * @param {number} avatarCurrentPositions.columnEnd - End column position.
+ * @param {object} avatar - The avatar current states.
+ * @param {string} avatar.currentSide - The avatar current side.
+ * @param {object} avatar.currentPositions - Avatar position in map.
+ * @param {number} avatar.currentPositions.rowStart - Start row position.
+ * @param {number} avatar.currentPositions.columnStart - Start column position.
+ * @param {number} avatar.currentPositions.rowEnd - End row position.
+ * @param {number} avatar.currentPositions.columnEnd - End column position.
  * @param {array} interactionBlocksPositions - List of blocks to interaction.
  *
  * @returns {object} All actions methods.
@@ -22,8 +23,7 @@ import getBlockPositions from './helpers/getBlockPositions';
  */
 
 const actions = (
-  avatarCurrentSide, 
-  avatarCurrentPositions, 
+  avatar, 
   interactionBlocksPositions) => {
 
   return {
@@ -42,10 +42,17 @@ const actions = (
      */
 
     a: cb => {
-
+  
       // ------------------
       // For help, see the flowchart algorithm in docs/flowcharts/02-actions.png
       // ------------------
+
+      // -----------------------------------------
+      // Get avatar states
+      // -----------------------------------------
+
+      const avatarCurrentSide = avatar.currentSide;
+      const avatarCurrentPositions = avatar.currentPositions;
 
       // -----------------------------------------
       // Resolve the forward block position

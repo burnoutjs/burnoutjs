@@ -1,4 +1,4 @@
-import { suite, test, assert, normalizeString } from 'nomsjs';
+import { suite, test, assert } from 'nomsjs';
 import params from './test_mocks/actionsParams';
 import actions from '../../src/controls/actions';
 

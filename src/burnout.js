@@ -32,7 +32,7 @@ const burnout = () => {
       ref: null,
       startPosition: null,
       side: null,
-      currentSide: null, // TODO: add default (first value) in avatar instance
+      currentSide: null,
       currentPositions: null,
       static: true,
     },
@@ -212,8 +212,7 @@ const burnout = () => {
       );
 
       const actionButtons = actions(
-        states.avatar.currentSide,
-        states.avatar.currentPositions,
+        states.avatar,
         states.interactionBlocksPositions
       );
 
