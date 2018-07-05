@@ -3,6 +3,7 @@ import createCamera from './elements/createCamera';
 import createBlock from './elements/createBlock';
 import createAvatar from './elements/createAvatar';
 import movements from './controls/movements';
+import actions from './controls/actions';
 import stringifyPosition from './helpers/stringifyPosition';
 
 /**
@@ -25,11 +26,14 @@ const burnout = () => {
     blocksRefs: [],
     collisionBlocksPositions: [],
     overBlocksPositions: [],
+    interactionBlocksPositions: [],
     blockSize: null,
     avatar: {
       ref: null,
       startPosition: null,
       side: null,
+      currentSide: null, // TODO: add default (first value) in avatar instance
+      currentPositions: null,
       static: true,
     },
   };
@@ -122,6 +126,10 @@ const burnout = () => {
         states.overBlocksPositions.push(configs.position);
       }
 
+      if (configs.interaction) {
+        states.interactionBlocksPositions.push(configs.position);
+      }
+
       states.blocksRefs.push(block);
     },
 
@@ -162,6 +170,8 @@ const burnout = () => {
       states.avatar.ref = avatar;
       states.avatar.startPosition = configs.position;
       states.avatar.side = configs.side;
+      states.avatar.currentSide = 'down';
+      states.avatar.currentPositions = configs.position;
       states.avatar.static = configs.static;
     },
 
@@ -193,7 +203,7 @@ const burnout = () => {
         return console.error('Burnout: No plugin added in defineControls() method');
       }
 
-      const coreControls = movements(
+      const axisMovements = movements(
         states.avatar,
         states.mapRef,
         states.collisionBlocksPositions,
@@ -201,7 +211,13 @@ const burnout = () => {
         states.blockSize
       );
 
-      controlPlugin(coreControls);
+      const actionButtons = actions(
+        states.avatar.currentSide,
+        states.avatar.currentPositions,
+        states.interactionBlocksPositions
+      );
+
+      controlPlugin(axisMovements, actionButtons);
     },
 
     /**

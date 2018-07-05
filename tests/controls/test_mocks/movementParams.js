@@ -12,6 +12,7 @@ const movementParams = () => {
 		ref: fakeAvatarRef(),
 		static: true,
 		startPosition: { rowStart: 2, columnStart: 2, rowEnd: 3, columnEnd: 3, },
+		currentPositions: { rowStart: 2, columnStart: 2, rowEnd: 3, columnEnd: 3, },
 		side: { 
 			up: 'side-up', 
 			down: 'side-down', 

@@ -5,7 +5,7 @@ import stringifyPosition from '../helpers/stringifyPosition';
 import getBlockPositions from './helpers/getBlockPositions';
 
 /**
- * Create all core controls and expose for plugins.
+ * Create all core movements methods and expose for plugins.
  * @module controls/movements
  *
  * @param {object} avatar - All Avatar configs.
@@ -21,6 +21,12 @@ import getBlockPositions from './helpers/getBlockPositions';
  * @param {string} avatar.side.down - ClassName for down sprite.
  * @param {string} avatar.side.left - ClassName for left sprite.
  * @param {string} avatar.side.right - ClassName for right sprite.
+ * @param {string} avatar.currentSide - The avatar current side.
+ * @param {object} avatar.currentPositions - The avatar current positions.
+ * @param {number} avatar.currentPositions.rowStart - Start row position.
+ * @param {number} avatar.currentPositions.columnStart - Start column position.
+ * @param {number} avatar.currentPositions.rowEnd - End row position.
+ * @param {number} avatar.currentPositions.columnEnd - End column position.
  * @param {object} map - Map DOM reference.
  * @param {array} collisionBlocksPositions - List of blocks for collisions.
  * @param {array} overBlocksPositions - List of blocks to over.
@@ -42,8 +48,6 @@ const movements = (
   // -----------------------------------------
 
   const states = {
-    currentAvatarPosition: avatar.startPosition,
-    currentAvatarSide: null,
     currentCameraPosition: {
       x: 0,
       y: 0,
@@ -69,7 +73,7 @@ const movements = (
   const movement = axis => {
 
     // ------------------
-    // For help, see the flowchart algorithm in docs/flowcharts/01-movement.jpeg
+    // For help, see the flowchart algorithm in docs/flowcharts/01-movement.png
     // ------------------
 
     return () => {
@@ -78,18 +82,18 @@ const movements = (
       * Set the avatar side.
       */
   
-      const noAxisSide = avatar.side && !(states.currentAvatarSide === axis.side);
+      const noAxisSide = avatar.side && !(avatar.currentSide === axis.side);
   
       if(noAxisSide) {
         avatar.ref.className = avatar.side[axis.side];
-        states.currentAvatarSide = axis.side;
+        avatar.currentSide = axis.side;
       }
   
       /**
       * Get the future position.
       */
   
-      const newPosition = axis.movement(states.currentAvatarPosition);
+      const newPosition = axis.movement(avatar.currentPositions);
   
       /**
       * Check collision.
@@ -119,7 +123,7 @@ const movements = (
       */
   
       avatar.ref.style = stringifyPosition(newPosition); // Avatar up movement
-      states.currentAvatarPosition = newPosition;
+      avatar.currentPositions = newPosition;
   
       /**
       * Check over.

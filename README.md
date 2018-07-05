@@ -115,6 +115,24 @@ burnout.defineBlock({
 });
 ```
 
+*A block with interaction (with a() button) and callback action*
+
+```js
+burnout.defineBlock({
+  className: 'grass',
+  interaction: true,
+  position: {
+    rowStart: 20,
+    columnStart: 20,
+    rowEnd: 21,
+    columnEnd: 21,
+    action: blockPosition => {
+      console.log(blockPosition);
+    },
+  }
+});
+```
+
 #### 3 - Define your avatar.
 
 ```js

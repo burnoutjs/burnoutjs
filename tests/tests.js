@@ -16,4 +16,5 @@ import './helpers/stringifyPosition.test.js';
 import './helpers/stringifyTranslate.test.js';
 
 // controls
-import './controls/controls.test.js';
+import './controls/movements.test.js';
+import './controls/actions.test.js';
