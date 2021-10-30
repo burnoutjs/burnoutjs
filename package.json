@@ -26,14 +26,18 @@
     "test": "node tests/index.js",
     "build": "BABEL_ENV=dev rollup -c",
     "dev": "BABEL_ENV=dev rollup -c -w",
-    "jsdocs": "jsdoc src/*.js"
+    "jsdocs": "jsdoc src/*.js",
+    "lint": "node_modules/.bin/eslint ./src/"
   },
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "eslint-plugin-html": "^4.0.3",
     "esm": "^3.0.55",
+    "husky": "^7.0.4",
     "jsdoc": "^3.5.3",
     "nomsjs": "^2.0.0",
     "rollup": "^0.45.2",
