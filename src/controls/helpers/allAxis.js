@@ -11,26 +11,26 @@ import moveRight from './moveRight';
  */
 
 const allAxis = [
-	{
-		side: 'up',
-		movement: moveUp,
-		updatedCameraPositionState: (state, blockSize) => state.y += blockSize,
-	},
-	{
-		side: 'down',
-		movement: moveDown,
-		updatedCameraPositionState: (state, blockSize) => state.y -= blockSize,
-	},
-	{
-		side: 'left',
-		movement: moveLeft,
-		updatedCameraPositionState: (state, blockSize) => state.x += blockSize,
-	},
-	{
-		side: 'right',
-		movement: moveRight,
-		updatedCameraPositionState: (state, blockSize) => state.x -= blockSize,
-	}
-]
+  {
+    side: 'up',
+    movement: moveUp,
+    updatedCameraPositionState: (state, blockSize) => state.y += blockSize,
+  },
+  {
+    side: 'down',
+    movement: moveDown,
+    updatedCameraPositionState: (state, blockSize) => state.y -= blockSize,
+  },
+  {
+    side: 'left',
+    movement: moveLeft,
+    updatedCameraPositionState: (state, blockSize) => state.x += blockSize,
+  },
+  {
+    side: 'right',
+    movement: moveRight,
+    updatedCameraPositionState: (state, blockSize) => state.x -= blockSize,
+  }
+];
 
 export default allAxis;

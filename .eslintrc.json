@@ -35,11 +35,6 @@
           "error",
           {"int32Hint": false}
       ],
-      "max-len": [
-          "error",
-          80,
-          2
-      ],
       "prefer-const": "error",
       "no-const-assign": "error",
       "no-var": "error",

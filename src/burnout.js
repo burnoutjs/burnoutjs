@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable no-useless-escape */
+
 import createMap from './elements/createMap';
 import createCamera from './elements/createCamera';
 import createBlock from './elements/createBlock';
@@ -74,9 +77,9 @@ const burnout = () => {
       const view = createCamera(configs.view, configs.blockSize);
 
       if (configs.developer) {
-        map.style.border = `1px solid`;
-        view.style.border = `1px solid red`;
-        view.style.overflow = `visible`;
+        map.style.border = '1px solid';
+        view.style.border = '1px solid red';
+        view.style.overflow = 'visible';
       }
 
       view.appendChild(map);
@@ -272,15 +275,15 @@ const burnout = () => {
       const newBlock = states.blocksRefs.filter((block) => {
 
         const stringPositions = stringifyPosition(positions)
-                                 .replace(/\s/g,''); // Remove whitespace
+          .replace(/\s/g,''); // Remove whitespace
 
         const blockStringPositions = block
-                                      .style
-                                      .cssText
-                                      .replace(/\s/g,'') // Remove whitespace
-                                      .replace(/\;/g,''); // Remove semicolons
+          .style
+          .cssText
+          .replace(/\s/g,'') // Remove whitespace
+          .replace(/\;/g,''); // Remove semicolons
 
-        return stringPositions == blockStringPositions;
+        return stringPositions === blockStringPositions;
 
       });
 

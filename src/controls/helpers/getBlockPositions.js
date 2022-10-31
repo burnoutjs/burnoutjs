@@ -13,12 +13,12 @@
  */
 
 const getBlockPositions = block => {
-	return {
-		rowStart: block.rowStart, 
-		columnStart: block.columnStart, 
-		rowEnd: block.rowEnd, 
-		columnEnd: block.columnEnd,
-	}
-}
+  return {
+    rowStart: block.rowStart, 
+    columnStart: block.columnStart, 
+    rowEnd: block.rowEnd, 
+    columnEnd: block.columnEnd,
+  };
+};
 
 export default getBlockPositions;
