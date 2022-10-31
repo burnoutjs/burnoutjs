@@ -35,7 +35,7 @@ const wasBumped = (currentPosition, blocksList) => {
   return {
     result,
     block,
-  }
+  };
 
 };
 

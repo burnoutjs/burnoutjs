@@ -107,7 +107,7 @@ const movements = (
           return collision.block.action(onlyBlockPositions); // Collision callback
         }
         return false; // Stop movement
-      };
+      }
   
       /**
       * Move map.
@@ -132,14 +132,14 @@ const movements = (
       const over = wasBumped(newPosition, overBlocksPositions);
   
       if (over.result && over.block.action) {
-        const onlyBlockPositions =  getBlockPositions(over.block)
+        const onlyBlockPositions =  getBlockPositions(over.block);
         return over.block.action(onlyBlockPositions); // Over callback
-      };
+      }
   
       return true;
   
-    }
-  }
+    };
+  };
 
   // -----------------------------------------
   // All movements methods
@@ -150,7 +150,7 @@ const movements = (
     down: movement(allAxis[1]),
     left: movement(allAxis[2]),
     right: movement(allAxis[3]),
-  }
+  };
 
 };
 

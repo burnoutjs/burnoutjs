@@ -61,18 +61,18 @@ const actions = (
       let forwardPosition;
 
       switch(avatarCurrentSide) {
-        case 'up':
-          forwardPosition = moveUp(avatarCurrentPositions);
-          break;
-        case 'down':
-          forwardPosition = moveDown(avatarCurrentPositions);
-          break;
-        case 'left':
-          forwardPosition = moveLeft(avatarCurrentPositions);
-          break;
-        case 'right':
-          forwardPosition = moveRight(avatarCurrentPositions);
-           break;
+      case 'up':
+        forwardPosition = moveUp(avatarCurrentPositions);
+        break;
+      case 'down':
+        forwardPosition = moveDown(avatarCurrentPositions);
+        break;
+      case 'left':
+        forwardPosition = moveLeft(avatarCurrentPositions);
+        break;
+      case 'right':
+        forwardPosition = moveRight(avatarCurrentPositions);
+        break;
       }
 
       // -----------------------------------------
@@ -99,7 +99,7 @@ const actions = (
         return {
           interactionCallback,
           aCallback,
-        }
+        };
 
       } else if (cb) {
 
@@ -110,7 +110,7 @@ const actions = (
         return {
           interactionCallback: null,
           aCallback: cb(), // a callback()
-        }
+        };
 
       }
 
@@ -156,7 +156,7 @@ const actions = (
 
     }
  
-  }
+  };
 
 };
 
